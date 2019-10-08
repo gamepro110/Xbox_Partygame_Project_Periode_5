@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class GuardAI : MonoBehaviour
 {
-    private float test;
+    [SerializeField] private Quaternion m_targetRotation;
+
+    [SerializeField] private float m_rotationSpeed;
+    [SerializeField] private RangedFloat m_minWaitTime;
+    [SerializeField] private RangedFloat m_maxWaitTime;
 
     #region Field of View variables
 
@@ -33,17 +37,66 @@ public class GuardAI : MonoBehaviour
         m_viewMeshFilter.mesh = m_viewMesh;
 
         StartCoroutine(FindTargetWithDelay(m_viewMeshRefreshRate));
+
+        StartCoroutine(StartGuardBehavior());
     }
+
+    //TODO add rotation behavoir (spawner timer iEnumarator)
 
     private void Update()
     {
-        //TODO add rotation behavoir (spawner timer iEnumarator)
+        transform.rotation = Quaternion.Slerp(transform.rotation, m_targetRotation, m_rotationSpeed * Time.deltaTime);
     }
 
     private void LateUpdate()
     {
         DrawFieldOfView();
     }
+
+    #region behavior
+
+    private IEnumerator StartGuardBehavior()
+    {
+        yield return new WaitForSeconds(m_maxWaitTime.maxValue);
+
+        yield return StartCoroutine(GuardRotating());
+        StopCoroutine(StartGuardBehavior());
+    }
+
+    private IEnumerator GuardRotating()
+    {
+        yield return new WaitForSeconds(GetMinWaitTime());
+
+        m_targetRotation = Quaternion.LookRotation(-transform.forward, Vector3.up);
+
+        if (transform.rotation.eulerAngles == new Vector3() || transform.rotation.eulerAngles == new Vector3(0, 180, 0))
+        {
+            //Debug.Log("Done Rotating");
+
+            yield return new WaitForSeconds(GetRandomWaitTime());
+
+            yield return StartCoroutine(StartGuardBehavior());
+
+            StopCoroutine(GuardRotating());
+        }
+    }
+
+    private float GetMinWaitTime()
+    {
+        return Random.Range(m_minWaitTime.minValue, m_minWaitTime.maxValue);
+    }
+
+    private float GetMaxWaitTime()
+    {
+        return Random.Range(m_maxWaitTime.minValue, m_maxWaitTime.maxValue);
+    }
+
+    private float GetRandomWaitTime()
+    {
+        return Random.Range(GetMinWaitTime(), GetMaxWaitTime());
+    }
+
+    #endregion behavior
 
     #region Field Of View
 

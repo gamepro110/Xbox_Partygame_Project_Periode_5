@@ -201,8 +201,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6f074146a686b479b5014aba5c3edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_viewRadius: 10
-  m_viewAngle: 110
+  m_targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  m_rotationSpeed: 10
+  m_minWaitTime:
+    minValue: 0.49673492
+    maxValue: 1.7535417
+  m_maxWaitTime:
+    minValue: 1.1452806
+    maxValue: 3.3964663
+  m_viewRadius: 20
+  m_viewAngle: 60
   m_obstacleMask:
     serializedVersion: 2
     m_Bits: 256
