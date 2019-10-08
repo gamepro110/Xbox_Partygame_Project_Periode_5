@@ -37,6 +37,7 @@ public class GuardAI : MonoBehaviour
 
     private void Update()
     {
+        //TODO add rotation behavoir (spawner timer iEnumarator)
     }
 
     private void LateUpdate()
@@ -70,11 +71,11 @@ public class GuardAI : MonoBehaviour
                 {
                     //TODO use PlayersInView to find players
 
-                    //if (target.GetComponentInParent<Player>())
-                    //{
-                    //    playerInSight = true;
-                    //    //do things here
-                    //}
+                    if (target.GetComponent<PlayerMovement>())
+                    {
+                        PlayersInView.Add(target);
+                        //do things here
+                    }
                 }
             }
         }

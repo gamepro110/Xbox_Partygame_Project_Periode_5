@@ -9,7 +9,7 @@ public class GuardAIFoVEditor : Editor
     private void OnSceneGUI()
     {
         GuardAI FoV = (GuardAI)target;
-        Handles.color = Color.black;
+        Handles.color = Color.clear;
         Handles.DrawWireArc(FoV.transform.position, Vector3.up, Vector3.forward, 360f, FoV.m_viewRadius);
 
         Vector3 viewAngleA = FoV.DirFromAngle(-FoV.m_viewAngle / 2, false);
