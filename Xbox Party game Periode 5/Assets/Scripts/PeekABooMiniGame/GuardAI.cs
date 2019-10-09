@@ -36,8 +36,6 @@ public class GuardAI : MonoBehaviour
         };
         m_viewMeshFilter.mesh = m_viewMesh;
 
-        StartCoroutine(FindTargetWithDelay(m_viewMeshRefreshRate));
-
         StartCoroutine(StartGuardBehavior());
     }
 
@@ -71,13 +69,40 @@ public class GuardAI : MonoBehaviour
 
         if (transform.rotation.eulerAngles == new Vector3() || transform.rotation.eulerAngles == new Vector3(0, 180, 0))
         {
-            //Debug.Log("Done Rotating");
+            PlayersInView.Clear();
 
-            yield return new WaitForSeconds(GetRandomWaitTime());
+            StartCoroutine(FindTargetWithDelay(m_viewMeshRefreshRate));
 
-            yield return StartCoroutine(StartGuardBehavior());
+            if (PlayersInView.Count > 0)
+            {
+                Debug.Log("in");//TODO its not getting here
+                for (int i = 0; i < PlayersInView.Count; i++)
+                {
+                    transform.rotation = Quaternion.LookRotation(PlayersInView[i].gameObject.transform.position, transform.up);
 
-            StopCoroutine(GuardRotating());
+                    GameObject go = new GameObject();
+                    {
+                        name = "test";
+                        transform.position = Vector3.MoveTowards(transform.position, PlayersInView[i].transform.position, 5 * Time.deltaTime);
+                    };
+                    go.AddComponent<BoxCollider>();
+
+                    Instantiate(go, transform.position, Quaternion.identity);
+                    //look at and shoot player
+                }
+            }
+            else
+            {
+                Debug.Log("out");
+
+                yield return new WaitForSeconds(GetRandomWaitTime());
+
+                yield return StartCoroutine(StartGuardBehavior());
+
+                StopCoroutine(GuardRotating());
+            }
+
+            StopCoroutine(FindTargetWithDelay(m_viewMeshRefreshRate));
         }
     }
 
@@ -124,9 +149,13 @@ public class GuardAI : MonoBehaviour
                 {
                     //TODO use PlayersInView to find players
 
-                    if (target.GetComponent<PlayerMovement>())
+                    if (target.GetComponent<Player>())
                     {
-                        PlayersInView.Add(target);
+                        if (!PlayersInView.Contains(target))
+                        {
+                            PlayersInView.Add(target);
+                            //Debug.Log(target.gameObject);
+                        }
                         //do things here
                     }
                 }
