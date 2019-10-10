@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     private float _YAxis;
     private Rigidbody rig;
 
+    [SerializeField] private Transform m_respawnLocation;
+
     private void Start()
     {
         rig = GetComponent<Rigidbody>();
@@ -55,5 +57,35 @@ public class Player : MonoBehaviour
             gameObject.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
             Speed = holdspeed;
         }
+    }
+
+    public void Hit()
+    {
+        Debug.Log($"{gameObject.name} got hit");
+        transform.position = m_respawnLocation.position;
+    }
+
+    private GuardAI Guard = null;
+
+    private void OnDrawGizmos()
+    {
+        if (Guard == null)
+        {
+            Guard = FindObjectOfType<GuardAI>();
+            if (Guard == null)
+            {
+                return;
+            }
+        }
+
+        if (Vector3.Distance(transform.position, Guard.transform.position) < 20)
+        {
+            Gizmos.color = Guard.ConeVisual(transform.position) ? Color.green : Color.black;
+        }
+        else
+        {
+            Gizmos.color = Color.black;
+        }
+        Gizmos.DrawSphere(transform.position, 0.5f);
     }
 }

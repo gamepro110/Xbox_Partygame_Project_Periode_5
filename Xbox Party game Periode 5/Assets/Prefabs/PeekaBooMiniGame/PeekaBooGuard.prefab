@@ -201,8 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6f074146a686b479b5014aba5c3edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_targetRotation: {x: 0, y: 0, z: 0, w: 0}
-  m_rotationSpeed: 10
+  m_lookingTowardsPlayers: 1
+  m_rotationSpeed: 5
   m_minWaitTime:
     minValue: 0.49673492
     maxValue: 1.7535417
@@ -218,6 +218,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   m_viewMeshResolution: 20
-  m_viewMeshRefreshRate: 0.5
+  m_viewMeshRefreshRate: 0.01
   m_viewMeshFilter: {fileID: 1146861786177418063}
   PlayersInView: []
+  m_LookLocation: {fileID: 5989204386629288643, guid: 6a43941e865804547992eefb2af7cac8,
+    type: 3}
+  m_BackLookLocation: {fileID: 6964860659637962056, guid: 360e0feb2f633324fa7d721f36c24d95,
+    type: 3}
+  m_bulletPrefab: {fileID: 7864433416609355739, guid: 043a522f687efc24796b90ffa618f3a2,
+    type: 3}
+  m_lookTarget: {x: 0, y: 0, z: 0}

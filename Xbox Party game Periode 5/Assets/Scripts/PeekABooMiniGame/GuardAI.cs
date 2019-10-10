@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GuardAI : MonoBehaviour
 {
-    [SerializeField] private Quaternion m_targetRotation;
-
-    [SerializeField] private float m_rotationSpeed;
-    [SerializeField] private RangedFloat m_minWaitTime;
-    [SerializeField] private RangedFloat m_maxWaitTime;
+    [SerializeField] private bool m_lookingTowardsPlayers = true;
 
     #region Field of View variables
+
+    [SerializeField] private float m_rotationSpeed = 10.0f;
+    [SerializeField] private RangedFloat m_minWaitTime;
+    [SerializeField] private RangedFloat m_maxWaitTime;
 
     public float m_viewRadius = 10.0f;
     [Range(60.0f, 180.0f)] public float m_viewAngle = 90.0f;
@@ -19,7 +19,7 @@ public class GuardAI : MonoBehaviour
     [SerializeField] private LayerMask m_targetMask;
 
     [SerializeField, Range(1.0f, 30.0f)] private float m_viewMeshResolution = 10.0f;
-    [SerializeField, Range(0.1f, 1.0f)] private float m_viewMeshRefreshRate = 1;
+    [SerializeField, Range(0.01f, 1.0f)] private float m_viewMeshRefreshRate = 1;
 
     [SerializeField] private MeshFilter m_viewMeshFilter = null;
     private Mesh m_viewMesh;
@@ -28,22 +28,39 @@ public class GuardAI : MonoBehaviour
 
     #endregion Field of View variables
 
+    [Space(10)]
+    [SerializeField] private GameObject m_LookLocation = null;
+
+    [SerializeField] private GameObject m_BackLookLocation = null;
+
+    [SerializeField] private GameObject m_bulletPrefab = null;
+    [SerializeField] private Vector3 m_lookTarget = Vector3.zero;
+
+    private GameObject body = null;
+
+    private void Awake()
+    {
+        body = GetComponentInChildren<Transform>().GetChild(0).gameObject;
+    }
+
     private void Start()
     {
         m_viewMesh = new Mesh
         {
-            name = "Mesh View"
+            name = "View Mesh"
         };
         m_viewMeshFilter.mesh = m_viewMesh;
+
+        m_lookTarget = m_LookLocation.transform.position;
+
+        StartCoroutine(FindTargetWithDelay(m_viewMeshRefreshRate));
 
         StartCoroutine(StartGuardBehavior());
     }
 
-    //TODO add rotation behavoir (spawner timer iEnumarator)
-
     private void Update()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, m_targetRotation, m_rotationSpeed * Time.deltaTime);
+        CharacterRotate();
     }
 
     private void LateUpdate()
@@ -51,13 +68,48 @@ public class GuardAI : MonoBehaviour
         DrawFieldOfView();
     }
 
+    /// <summary>
+    /// 1 if parallel, 0 if perpendicular, -1 if reverse parallel
+    /// </summary>
+    /// <param name="objectLocation"></param>
+    /// <returns>the object you are looking at</returns>
+    public bool ConeVisual(Vector3 objectLocation)
+    {
+        float cosAngle = Vector3.Dot((objectLocation - transform.position).normalized, transform.forward);
+        float angle = Mathf.Acos(cosAngle) * Mathf.Rad2Deg;
+        return angle < m_viewRadius;
+    }
+
     #region behavior
+
+    private void CharacterRotate()
+    {
+        Vector3 difference = m_lookTarget - gameObject.transform.position;
+        transform.forward = Vector3.Slerp(transform.forward, difference, m_rotationSpeed * Time.deltaTime);
+
+        Vector3.Slerp(transform.forward, difference, m_rotationSpeed * Time.deltaTime);
+
+        body.transform.rotation = new Quaternion(0, transform.rotation.y, 0, 0);
+    }
 
     private IEnumerator StartGuardBehavior()
     {
+        PlayersInView.Clear();
+
         yield return new WaitForSeconds(m_maxWaitTime.maxValue);
 
-        yield return StartCoroutine(GuardRotating());
+        if (m_lookingTowardsPlayers)
+        {
+            Debug.Log($"{PlayersInView.Count} visable players");
+        }
+
+        while (PlayersInView.Count >= 1)
+        {
+            //TODO its not getting here
+            yield return AimAndShootPlayer();
+        }
+
+        StartCoroutine(GuardRotating());
         StopCoroutine(StartGuardBehavior());
     }
 
@@ -65,45 +117,40 @@ public class GuardAI : MonoBehaviour
     {
         yield return new WaitForSeconds(GetMinWaitTime());
 
-        m_targetRotation = Quaternion.LookRotation(-transform.forward, Vector3.up);
+        m_lookingTowardsPlayers = !m_lookingTowardsPlayers;
 
-        if (transform.rotation.eulerAngles == new Vector3() || transform.rotation.eulerAngles == new Vector3(0, 180, 0))
+        m_lookTarget = m_lookingTowardsPlayers ? m_LookLocation.transform.position : m_BackLookLocation.transform.position;
+
+        //Debug.Log($"looks in player direction = {m_lookingTowardsPlayers}");
+        //Debug.Log(m_lookTarget = m_lookingTowardsPlayers ? m_LookLocation.transform.position : m_BackLookLocation.transform.position);
+
+        if (ConeVisual(m_LookLocation.transform.position) || ConeVisual(m_BackLookLocation.transform.position))
         {
-            PlayersInView.Clear();
+            yield return new WaitForSeconds(GetRandomWaitTime());
 
-            StartCoroutine(FindTargetWithDelay(m_viewMeshRefreshRate));
+            yield return StartCoroutine(StartGuardBehavior());
 
-            if (PlayersInView.Count > 0)
-            {
-                Debug.Log("in");//TODO its not getting here
-                for (int i = 0; i < PlayersInView.Count; i++)
-                {
-                    transform.rotation = Quaternion.LookRotation(PlayersInView[i].gameObject.transform.position, transform.up);
-
-                    GameObject go = new GameObject();
-                    {
-                        name = "test";
-                        transform.position = Vector3.MoveTowards(transform.position, PlayersInView[i].transform.position, 5 * Time.deltaTime);
-                    };
-                    go.AddComponent<BoxCollider>();
-
-                    Instantiate(go, transform.position, Quaternion.identity);
-                    //look at and shoot player
-                }
-            }
-            else
-            {
-                Debug.Log("out");
-
-                yield return new WaitForSeconds(GetRandomWaitTime());
-
-                yield return StartCoroutine(StartGuardBehavior());
-
-                StopCoroutine(GuardRotating());
-            }
-
-            StopCoroutine(FindTargetWithDelay(m_viewMeshRefreshRate));
+            StopCoroutine(GuardRotating());
         }
+    }
+
+    private IEnumerator AimAndShootPlayer()
+    {
+        //TODO check why the bullet acts wierd
+        for (int i = 0; i < PlayersInView.Count; i++)
+        {
+            //Debug.Log($"Found player ({PlayersInView[i]})");
+            m_lookTarget = PlayersInView[i].transform.position;
+
+            Vector3 offset = new Vector3(0, 0.5f);
+            Instantiate(m_bulletPrefab, transform.position + offset, transform.rotation);
+
+            PlayersInView.RemoveAt(i);
+
+            yield return new WaitForSeconds(2.0f);
+        }
+
+        StopCoroutine(AimAndShootPlayer());
     }
 
     private float GetMinWaitTime()
@@ -239,4 +286,10 @@ public class GuardAI : MonoBehaviour
     }
 
     #endregion Field Of View
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawCube(m_lookTarget, Vector3.one);
+    }
 }
