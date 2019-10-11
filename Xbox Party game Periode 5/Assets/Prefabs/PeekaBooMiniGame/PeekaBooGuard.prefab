@@ -165,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1146861786285314965}
-  - component: {fileID: 1146861786285314966}
+  - component: {fileID: 4982313449489538217}
   m_Layer: 0
   m_Name: PeekaBooGuard
   m_TagString: Untagged
@@ -189,7 +189,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1146861786285314966
+--- !u!114 &4982313449489538217
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,17 +198,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1146861786285314964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f6f074146a686b479b5014aba5c3edc, type: 3}
+  m_Script: {fileID: 11500000, guid: f4293d58b2a933c45aa294a9ae2f1254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_lookingTowardsPlayers: 1
-  m_rotationSpeed: 5
   m_minWaitTime:
-    minValue: 0.49673492
-    maxValue: 1.7535417
+    minValue: 1.9959825
+    maxValue: 3.0020504
   m_maxWaitTime:
-    minValue: 1.1452806
-    maxValue: 3.3964663
+    minValue: 3.001119
+    maxValue: 5
   m_viewRadius: 20
   m_viewAngle: 60
   m_obstacleMask:
@@ -221,10 +219,10 @@ MonoBehaviour:
   m_viewMeshRefreshRate: 0.01
   m_viewMeshFilter: {fileID: 1146861786177418063}
   PlayersInView: []
-  m_LookLocation: {fileID: 5989204386629288643, guid: 6a43941e865804547992eefb2af7cac8,
-    type: 3}
-  m_BackLookLocation: {fileID: 6964860659637962056, guid: 360e0feb2f633324fa7d721f36c24d95,
-    type: 3}
+  m_rotationSpeed: 5
+  m_lookingTowardsPlayers: 1
+  m_LookLocation: {fileID: 0}
+  m_BackLookLocation: {fileID: 0}
+  m_fireRate: 0.75
   m_bulletPrefab: {fileID: 7864433416609355739, guid: 043a522f687efc24796b90ffa618f3a2,
     type: 3}
-  m_lookTarget: {x: 0, y: 0, z: 0}

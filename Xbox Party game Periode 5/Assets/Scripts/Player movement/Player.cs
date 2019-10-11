@@ -22,8 +22,12 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Transform m_respawnLocation;
 
+    private Vector3 m_startScale = Vector3.zero;
+
     private void Start()
     {
+        m_startScale = transform.localScale;
+
         rig = GetComponent<Rigidbody>();
         holdspeed = Speed;
     }
@@ -49,12 +53,12 @@ public class Player : MonoBehaviour
 
         if (XCI.GetButtonDown(XboxButton.A, Player_Nummber))
         {
-            gameObject.transform.localScale = new Vector3(0.012f, 0.007f, 0.01f);
+            gameObject.transform.localScale = new Vector3(m_startScale.x * 1.25f, m_startScale.y * 0.7f, m_startScale.z);
             Speed = 2;
         }
         if (XCI.GetButtonUp(XboxButton.A, Player_Nummber))
         {
-            gameObject.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+            gameObject.transform.localScale = m_startScale;
             Speed = holdspeed;
         }
     }
@@ -63,29 +67,6 @@ public class Player : MonoBehaviour
     {
         Debug.Log($"{gameObject.name} got hit");
         transform.position = m_respawnLocation.position;
-    }
-
-    private GuardAI Guard = null;
-
-    private void OnDrawGizmos()
-    {
-        if (Guard == null)
-        {
-            Guard = FindObjectOfType<GuardAI>();
-            if (Guard == null)
-            {
-                return;
-            }
-        }
-
-        if (Vector3.Distance(transform.position, Guard.transform.position) < 20)
-        {
-            Gizmos.color = Guard.ConeVisual(transform.position) ? Color.green : Color.black;
-        }
-        else
-        {
-            Gizmos.color = Color.black;
-        }
-        Gizmos.DrawSphere(transform.position, 0.5f);
+        transform.rotation = new Quaternion(0, 0, 0, 0);
     }
 }

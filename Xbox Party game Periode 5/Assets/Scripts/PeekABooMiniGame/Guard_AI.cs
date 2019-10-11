@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuardAI : MonoBehaviour
+public class Guard_AI : MonoBehaviour
 {
-    [SerializeField] private bool m_lookingTowardsPlayers = true;
-
     #region Field of View variables
 
-    [SerializeField] private float m_rotationSpeed = 10.0f;
+    [Header("Field Of View Variables")]
     [SerializeField] private RangedFloat m_minWaitTime;
+
     [SerializeField] private RangedFloat m_maxWaitTime;
 
     public float m_viewRadius = 10.0f;
@@ -28,38 +27,104 @@ public class GuardAI : MonoBehaviour
 
     #endregion Field of View variables
 
-    [Space(10)]
-    [SerializeField] private GameObject m_LookLocation = null;
+    [Header("Rotation variables")]
+    [SerializeField] private float m_rotationSpeed = 10.0f;
 
-    [SerializeField] private GameObject m_BackLookLocation = null;
+    [SerializeField] private bool m_lookingTowardsPlayers = true;
+
+    [SerializeField] private Transform m_LookLocation = null;
+    [SerializeField] private Transform m_BackLookLocation = null;
+
+    private Vector3 m_lookTarget = Vector3.zero;
+
+    private float m_waitingTimer = 0;
+    private float m_targetWaitTime = 1;
+
+    [SerializeField, Range(0.5f, 2.0f)] private float m_fireRate = 1.0f;
+    private float m_nextFire = 0;
 
     [SerializeField] private GameObject m_bulletPrefab = null;
-    [SerializeField] private Vector3 m_lookTarget = Vector3.zero;
-
-    private GameObject body = null;
+    private bool PlayerVisable = false;
 
     private void Awake()
-    {
-        body = GetComponentInChildren<Transform>().GetChild(0).gameObject;
-    }
-
-    private void Start()
     {
         m_viewMesh = new Mesh
         {
             name = "View Mesh"
         };
         m_viewMeshFilter.mesh = m_viewMesh;
+    }
 
-        m_lookTarget = m_LookLocation.transform.position;
+    private void Start()
+    {
+        m_lookTarget = m_LookLocation.position;
 
         StartCoroutine(FindTargetWithDelay(m_viewMeshRefreshRate));
-
-        StartCoroutine(StartGuardBehavior());
     }
 
     private void Update()
     {
+        //rotation
+        if (!PlayerVisable)
+        {
+            //rotation direction
+            if (m_lookingTowardsPlayers)
+            {
+                m_lookTarget = m_LookLocation.position;
+            }
+            else
+            {
+                m_lookTarget = m_BackLookLocation.position;
+            }
+
+            m_waitingTimer += Time.deltaTime / 2;
+            if (m_waitingTimer > m_targetWaitTime)
+            {
+                m_lookingTowardsPlayers = !m_lookingTowardsPlayers;
+                m_waitingTimer = 0;
+                m_targetWaitTime = GetRandomWaitTime();
+            }
+        }
+        else
+        {
+            Player[] player = new Player[4];
+            for (int i = 0; i < PlayersInView.Count; i++)
+            {
+                player[i] = PlayersInView[i].GetComponent<Player>();
+            }
+
+            if (player[0].M_Speed.magnitude > player[0].M_deadzone)
+            {
+                while (Time.time > m_nextFire)
+                {
+                    m_lookTarget = PlayersInView[0].transform.position;
+                    transform.LookAt(PlayersInView[0].transform.position);
+
+                    //Bullet bullet = m_bulletPrefab.GetComponent<Bullet>();
+                    //bullet.SetTarget(PlayersInView[0].transform.position);
+
+                    Instantiate(m_bulletPrefab, transform.position, transform.rotation);
+
+                    PlayersInView.RemoveAt(0);
+
+                    m_nextFire = Time.time + m_fireRate;
+                }
+            }
+            else
+            {
+                PlayersInView.RemoveAt(0);
+            }
+        }
+
+        if (PlayersInView.Count >= 1)
+        {
+            PlayerVisable = true;
+        }
+        else
+        {
+            PlayerVisable = false;
+        }
+
         CharacterRotate();
     }
 
@@ -80,81 +145,13 @@ public class GuardAI : MonoBehaviour
         return angle < m_viewRadius;
     }
 
-    #region behavior
-
     private void CharacterRotate()
     {
         Vector3 difference = m_lookTarget - gameObject.transform.position;
         transform.forward = Vector3.Slerp(transform.forward, difference, m_rotationSpeed * Time.deltaTime);
-
-        Vector3.Slerp(transform.forward, difference, m_rotationSpeed * Time.deltaTime);
-
-        body.transform.rotation = new Quaternion(0, transform.rotation.y, 0, 0);
     }
 
-    private IEnumerator StartGuardBehavior()
-    {
-        PlayersInView.Clear();
-
-        yield return new WaitForSeconds(m_maxWaitTime.maxValue);
-
-        if (m_lookingTowardsPlayers)
-        {
-            Debug.Log($"{PlayersInView.Count} visable players");
-        }
-
-        while (PlayersInView.Count >= 1)
-        {
-            //TODO its not getting here
-            yield return AimAndShootPlayer();
-        }
-
-        StartCoroutine(GuardRotating());
-        StopCoroutine(StartGuardBehavior());
-    }
-
-    private IEnumerator GuardRotating()
-    {
-        yield return new WaitForSeconds(GetMinWaitTime());
-
-        m_lookingTowardsPlayers = !m_lookingTowardsPlayers;
-
-        m_lookTarget = m_lookingTowardsPlayers ? m_LookLocation.transform.position : m_BackLookLocation.transform.position;
-
-        //Debug.Log($"looks in player direction = {m_lookingTowardsPlayers}");
-        //Debug.Log(m_lookTarget = m_lookingTowardsPlayers ? m_LookLocation.transform.position : m_BackLookLocation.transform.position);
-
-        if (ConeVisual(m_LookLocation.transform.position) || ConeVisual(m_BackLookLocation.transform.position))
-        {
-            yield return new WaitForSeconds(GetRandomWaitTime());
-
-            yield return StartCoroutine(StartGuardBehavior());
-
-            StopCoroutine(GuardRotating());
-        }
-    }
-
-    private IEnumerator AimAndShootPlayer()
-    {
-        //TODO check why the bullet acts wierd
-        for (int i = 0; i < PlayersInView.Count; i++)
-        {
-            //Debug.Log($"Found player ({PlayersInView[i]})");
-            m_lookTarget = PlayersInView[i].transform.position;
-
-            Bullet bullet = m_bulletPrefab.GetComponent<Bullet>();
-            //bullet.SetTarget(PlayersInView[i].transform.position);
-
-            Vector3 offset = new Vector3(0, 0.5f);
-            Instantiate(m_bulletPrefab, transform.position + offset, transform.rotation);
-
-            PlayersInView.RemoveAt(i);
-
-            yield return new WaitForSeconds(2.0f);
-        }
-
-        StopCoroutine(AimAndShootPlayer());
-    }
+    #region Waiting time values
 
     private float GetMinWaitTime()
     {
@@ -171,7 +168,7 @@ public class GuardAI : MonoBehaviour
         return Random.Range(GetMinWaitTime(), GetMaxWaitTime());
     }
 
-    #endregion behavior
+    #endregion Waiting time values
 
     #region Field Of View
 

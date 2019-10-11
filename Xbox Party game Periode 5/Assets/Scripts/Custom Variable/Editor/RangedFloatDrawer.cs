@@ -17,7 +17,7 @@ public class RangedFloatDrawer : PropertyDrawer
         float maxValue = maxProp.floatValue;
 
         float rangeMin = 0;
-        float rangeMax = 5;//Change these to change the min/max value in the inspector
+        float rangeMax = 7;//Change these to change the min/max value in the inspector
 
         var ranges = (MinMaxRangeAttribute[])fieldInfo.GetCustomAttributes(typeof(MinMaxRangeAttribute), true);
         if (ranges.Length > 0)
