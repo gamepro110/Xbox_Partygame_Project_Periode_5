@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class LocInView : MonoBehaviour
 {
-    private GuardAI coneView = null;
+    private Guard_AI coneView = null;
 
     private void OnDrawGizmos()
     {
         if (coneView == null)
         {
-            coneView = FindObjectOfType<GuardAI>();
+            coneView = FindObjectOfType<Guard_AI>();
             if (coneView == null)
             {
                 return;

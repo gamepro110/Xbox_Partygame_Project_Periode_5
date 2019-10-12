@@ -46,8 +46,13 @@ public class Guard_AI : MonoBehaviour
     [SerializeField] private GameObject m_bulletPrefab = null;
     private bool PlayerVisable = false;
 
+    [SerializeField] private SimpleAudioEvent simpleAudio = null;
+    private AudioSource audioSource = null;
+
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+
         m_viewMesh = new Mesh
         {
             name = "View Mesh"
@@ -102,6 +107,7 @@ public class Guard_AI : MonoBehaviour
 
                     //Bullet bullet = m_bulletPrefab.GetComponent<Bullet>();
                     //bullet.SetTarget(PlayersInView[0].transform.position);
+                    simpleAudio.Play(audioSource);
 
                     Instantiate(m_bulletPrefab, transform.position, transform.rotation);
 
