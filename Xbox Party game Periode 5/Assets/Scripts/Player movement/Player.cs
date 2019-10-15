@@ -6,6 +6,8 @@ using XboxCtrlrInput;
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
+    private bool m_controlerControl = true;
+
     //speeds
     public Vector3 M_Speed;
 
@@ -34,6 +36,10 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (!m_controlerControl)
+        {
+            return;
+        }
         _XAxis = -XCI.GetAxis(XboxAxis.LeftStickX, Player_Nummber);
         _YAxis = -XCI.GetAxis(XboxAxis.LeftStickY, Player_Nummber);
 
@@ -65,8 +71,30 @@ public class Player : MonoBehaviour
 
     public void Hit()
     {
-        //Debug.Log($"{gameObject.name} got hit");
-        transform.position = m_respawnLocation.position;
+        m_controlerControl = false;
+
+        StartCoroutine(PlayerLerpToRespawn());
+
         transform.rotation = new Quaternion(0, 0, 0, 0);
+        //Debug.Log($"{gameObject.name} got hit");
+        //transform.position = m_respawnLocation.position;
+    }
+
+    private IEnumerator PlayerLerpToRespawn()
+    {
+        if (transform.position != m_respawnLocation.position)
+        {
+            transform.position = Vector3.Slerp(transform.position, m_respawnLocation.position, 3 * Time.deltaTime);
+
+            if (transform.position == m_respawnLocation.position)
+            {
+                new WaitForSeconds(1);
+                m_controlerControl = true;
+                yield return new WaitForSeconds(0);
+            }
+        }
+        StopCoroutine(PlayerLerpToRespawn());
+        yield return new WaitForSeconds(0);
+        //TODO try to make this work
     }
 }
