@@ -35,7 +35,7 @@ public class Guard_AI : MonoBehaviour
     [SerializeField] private Transform m_LookLocation = null;
     [SerializeField] private Transform m_BackLookLocation = null;
 
-    private Vector3 m_lookTarget = Vector3.zero;
+    private Vector3 m_lookTarget;
 
     private float m_waitingTimer = 0;
     private float m_targetWaitTime = 1;
@@ -177,10 +177,10 @@ public class Guard_AI : MonoBehaviour
         return Random.Range(m_maxWaitTime.minValue, m_maxWaitTime.maxValue);
     }
 
-    private float GetRandomWaitTime()
-    {
-        return Random.Range(GetMinWaitTime(), GetMaxWaitTime());
-    }
+    //private float GetRandomWaitTime()
+    //{
+    //    return Random.Range(GetMinWaitTime(), GetMaxWaitTime());
+    //}
 
     #endregion Waiting time values
 

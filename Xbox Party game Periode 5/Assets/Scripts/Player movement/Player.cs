@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using XboxCtrlrInput;
@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
         if (XCI.GetButtonDown(XboxButton.A, Player_Nummber))
         {
             gameObject.transform.localScale = new Vector3(m_startScale.x * 1.25f, m_startScale.y * 0.7f, m_startScale.z);
-            Speed = 2;
+            Speed *= 0.45f;
         }
         if (XCI.GetButtonUp(XboxButton.A, Player_Nummber))
         {
@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
 
     public void Hit()
     {
-        Debug.Log($"{gameObject.name} got hit");
+        //Debug.Log($"{gameObject.name} got hit");
         transform.position = m_respawnLocation.position;
         transform.rotation = new Quaternion(0, 0, 0, 0);
     }
