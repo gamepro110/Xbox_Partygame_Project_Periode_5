@@ -34,12 +34,12 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        _XAxis = XCI.GetAxisRaw(XboxAxis.LeftStickX, Player_Nummber);
-        _YAxis = XCI.GetAxisRaw(XboxAxis.LeftStickY, Player_Nummber);
+        _XAxis = -XCI.GetAxis(XboxAxis.LeftStickX, Player_Nummber);
+        _YAxis = -XCI.GetAxis(XboxAxis.LeftStickY, Player_Nummber);
 
         M_Speed = new Vector3(_XAxis, 0f, _YAxis);
 
-        if (M_Speed.magnitude < M_deadzone)
+        if (M_Speed.magnitude <= M_deadzone)
         {
             M_Speed = Vector3.zero;
         }

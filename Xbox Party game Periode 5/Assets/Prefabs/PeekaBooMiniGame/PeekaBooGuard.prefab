@@ -203,11 +203,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_minWaitTime:
-    minValue: 1.9959825
-    maxValue: 3.0020504
+    minValue: 1.0020174
+    maxValue: 2.001019
   m_maxWaitTime:
-    minValue: 3.001119
-    maxValue: 5
+    minValue: 1.9978544
+    maxValue: 3.4950967
   m_viewRadius: 20
   m_viewAngle: 60
   m_obstacleMask:
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_lookingTowardsPlayers: 1
   m_LookLocation: {fileID: 0}
   m_BackLookLocation: {fileID: 0}
-  m_fireRate: 0.75
+  m_fireRate: 0.4
   m_bulletPrefab: {fileID: 7864433416609355739, guid: 043a522f687efc24796b90ffa618f3a2,
     type: 3}
   simpleAudio: {fileID: 11400000, guid: 000590b4bd0dad44781c5502da3c0730, type: 2}

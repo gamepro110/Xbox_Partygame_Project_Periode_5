@@ -510,6 +510,11 @@ PrefabInstance:
       propertyPath: m_BackLookLocation
       value: 
       objectReference: {fileID: 4393641261314532665}
+    - target: {fileID: 4982313449489538217, guid: 94af65e8923d9a24abdb64b87dabdb4d,
+        type: 3}
+      propertyPath: m_minWaitTime.maxValue
+      value: 2.497832
+      objectReference: {fileID: 0}
     - target: {fileID: 1146861786285314965, guid: 94af65e8923d9a24abdb64b87dabdb4d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -787,6 +792,11 @@ PrefabInstance:
       propertyPath: m_respawnLocation
       value: 
       objectReference: {fileID: 679834621}
+    - target: {fileID: 5885802985999730454, guid: 1f2eb94feef775f459b538b558c7490e,
+        type: 3}
+      propertyPath: Speed
+      value: 3.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f2eb94feef775f459b538b558c7490e, type: 3}
 --- !u!4 &5627964912981660314
@@ -860,6 +870,11 @@ PrefabInstance:
       propertyPath: m_respawnLocation
       value: 
       objectReference: {fileID: 1187391976}
+    - target: {fileID: 2788970917266361913, guid: 5661700e1f5bfbd4bbfc4b8f6a3af0c6,
+        type: 3}
+      propertyPath: Speed
+      value: 3.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5661700e1f5bfbd4bbfc4b8f6a3af0c6, type: 3}
 --- !u!114 &7530815937383073196
@@ -931,6 +946,11 @@ PrefabInstance:
       propertyPath: m_respawnLocation
       value: 
       objectReference: {fileID: 1888108958}
+    - target: {fileID: 7457672002946996728, guid: 7fc82b25d9590274ea36374ea2fed693,
+        type: 3}
+      propertyPath: Speed
+      value: 3.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fc82b25d9590274ea36374ea2fed693, type: 3}
 --- !u!1001 &9013599145021290499
@@ -990,5 +1010,10 @@ PrefabInstance:
       propertyPath: m_respawnLocation
       value: 
       objectReference: {fileID: 1184035461}
+    - target: {fileID: 8490894955417942839, guid: dacccf6a76b085c4288060658edf58f9,
+        type: 3}
+      propertyPath: Speed
+      value: 3.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dacccf6a76b085c4288060658edf58f9, type: 3}
