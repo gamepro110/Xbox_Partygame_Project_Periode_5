@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     private float _YAxis;
     private Rigidbody rig;
 
+    [Range(1, 4)]
+    public int Playernummber;
+
     
 
     private void Start()
@@ -29,6 +32,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        
         _XAxis = XCI.GetAxisRaw(XboxAxis.LeftStickX, Player_Nummber);
         _YAxis = XCI.GetAxisRaw(XboxAxis.LeftStickY, Player_Nummber);
 
@@ -55,6 +59,29 @@ public class Player : MonoBehaviour
         {
             gameObject.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
             Speed = holdspeed;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Bullet"))
+        {
+            if(Playernummber == 1)
+            {
+                
+            }
+            if(Playernummber == 2)
+            {
+                
+            }
+            if(Playernummber == 3)
+            {
+                
+            }
+            if(Playernummber == 4)
+            {
+                
+            }
         }
     }
 }
