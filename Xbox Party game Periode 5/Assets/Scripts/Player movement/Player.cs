@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using XboxCtrlrInput;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
@@ -24,16 +25,21 @@ public class Player : MonoBehaviour
 
     private Vector3 m_startScale = Vector3.zero;
 
+    [SerializeField] private Text playerScoreText;
+    private int playerScore;
+
     private void Start()
     {
         m_startScale = transform.localScale;
 
         rig = GetComponent<Rigidbody>();
         holdspeed = Speed;
+        playerScore = 0;
     }
 
     private void Update()
     {
+        playerScoreText.text = "" + playerScore;
         _XAxis = -XCI.GetAxis(XboxAxis.LeftStickX, Player_Nummber);
         _YAxis = -XCI.GetAxis(XboxAxis.LeftStickY, Player_Nummber);
 
@@ -68,5 +74,17 @@ public class Player : MonoBehaviour
         //Debug.Log($"{gameObject.name} got hit");
         transform.position = m_respawnLocation.position;
         transform.rotation = new Quaternion(0, 0, 0, 0);
+
+    }
+
+
+    public void AtFinish()
+    {
+        transform.position = m_respawnLocation.position;
+        transform.rotation = new Quaternion(0, 0, 0, 0);
+        playerScore++;
+
     }
 }
+
+    
