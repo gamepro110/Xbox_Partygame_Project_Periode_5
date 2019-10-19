@@ -7,7 +7,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
-    private bool m_controlerControl = true;
+    private bool m_controlerHasControl = true;
 
     //speeds
     public Vector3 M_Speed;
@@ -36,16 +36,20 @@ public class Player : MonoBehaviour
 
         rig = GetComponent<Rigidbody>();
         holdspeed = Speed;
+
         playerScore = 0;
+        UpdateUI();
     }
 
     private void Update()
     {
-        if (!m_controlerControl)
+        if (!m_controlerHasControl)
         {
             return;
         }
-        playerScoreText.text = "" + playerScore;
+
+        #region Movement
+
         _XAxis = -XCI.GetAxis(XboxAxis.LeftStickX, Player_Nummber);
         _YAxis = -XCI.GetAxis(XboxAxis.LeftStickY, Player_Nummber);
 
@@ -63,6 +67,8 @@ public class Player : MonoBehaviour
 
         rig.MovePosition(transform.position + (M_Speed * Speed) * Time.deltaTime);
 
+        #endregion Movement
+
         if (XCI.GetButtonDown(XboxButton.A, Player_Nummber))
         {
             gameObject.transform.localScale = new Vector3(m_startScale.x * 1.25f, m_startScale.y * 0.7f, m_startScale.z);
@@ -77,25 +83,25 @@ public class Player : MonoBehaviour
 
     public void Hit()
     {
-        m_controlerControl = false;
-
-        StartCoroutine(PlayerLerpToRespawn());
-
-        transform.rotation = new Quaternion(0, 0, 0, 0);
         //Debug.Log($"{gameObject.name} got hit");
+        //m_controlerHasControl = false;
+
         transform.position = m_respawnLocation.position;
         transform.rotation = new Quaternion(0, 0, 0, 0);
-
     }
-
 
     public void AtFinish()
     {
-        transform.position = m_respawnLocation.position;
-        transform.rotation = new Quaternion(0, 0, 0, 0);
         playerScore++;
 
+        transform.position = m_respawnLocation.position;
+        transform.rotation = new Quaternion(0, 0, 0, 0);
+
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        playerScoreText.text = $"{playerScore}";
     }
 }
-
-    
