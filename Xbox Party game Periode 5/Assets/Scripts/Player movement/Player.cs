@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using XboxCtrlrInput;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
@@ -26,12 +27,16 @@ public class Player : MonoBehaviour
 
     private Vector3 m_startScale = Vector3.zero;
 
+    [SerializeField] private Text playerScoreText;
+    private int playerScore;
+
     private void Start()
     {
         m_startScale = transform.localScale;
 
         rig = GetComponent<Rigidbody>();
         holdspeed = Speed;
+        playerScore = 0;
     }
 
     private void Update()
@@ -40,6 +45,7 @@ public class Player : MonoBehaviour
         {
             return;
         }
+        playerScoreText.text = "" + playerScore;
         _XAxis = -XCI.GetAxis(XboxAxis.LeftStickX, Player_Nummber);
         _YAxis = -XCI.GetAxis(XboxAxis.LeftStickY, Player_Nummber);
 
@@ -77,24 +83,19 @@ public class Player : MonoBehaviour
 
         transform.rotation = new Quaternion(0, 0, 0, 0);
         //Debug.Log($"{gameObject.name} got hit");
-        //transform.position = m_respawnLocation.position;
+        transform.position = m_respawnLocation.position;
+        transform.rotation = new Quaternion(0, 0, 0, 0);
+
     }
 
-    private IEnumerator PlayerLerpToRespawn()
-    {
-        if (transform.position != m_respawnLocation.position)
-        {
-            transform.position = Vector3.Slerp(transform.position, m_respawnLocation.position, 3 * Time.deltaTime);
 
-            if (transform.position == m_respawnLocation.position)
-            {
-                new WaitForSeconds(1);
-                m_controlerControl = true;
-                yield return new WaitForSeconds(0);
-            }
-        }
-        StopCoroutine(PlayerLerpToRespawn());
-        yield return new WaitForSeconds(0);
-        //TODO try to make this work
+    public void AtFinish()
+    {
+        transform.position = m_respawnLocation.position;
+        transform.rotation = new Quaternion(0, 0, 0, 0);
+        playerScore++;
+
     }
 }
+
+    
