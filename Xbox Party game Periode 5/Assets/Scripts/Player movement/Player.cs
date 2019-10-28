@@ -7,10 +7,12 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
-    private bool m_controlerHasControl = true;
+    [SerializeField] private bool m_controlerHasControl = true;
+    [SerializeField] private float m_lerpToRespawnTimer = 10f;
+    [SerializeField, Range(0.1f, 1.0f)] private float m_distanceToRegainControll = 0.2f;
 
     //speeds
-    public Vector3 M_Speed;
+    [Space(10)] public Vector3 M_Speed;
 
     public float Speed = 5;
     private float holdspeed;
@@ -43,65 +45,99 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (!m_controlerHasControl)
+        if (m_controlerHasControl)
         {
-            return;
-        }
+            #region Movement
 
-        #region Movement
+            _XAxis = -XCI.GetAxis(XboxAxis.LeftStickX, Player_Nummber);
+            _YAxis = -XCI.GetAxis(XboxAxis.LeftStickY, Player_Nummber);
 
-        _XAxis = -XCI.GetAxis(XboxAxis.LeftStickX, Player_Nummber);
-        _YAxis = -XCI.GetAxis(XboxAxis.LeftStickY, Player_Nummber);
+            M_Speed = new Vector3(_XAxis, 0f, _YAxis);
 
-        M_Speed = new Vector3(_XAxis, 0f, _YAxis);
+            if (M_Speed.magnitude <= M_deadzone)
+            {
+                M_Speed = Vector3.zero;
+            }
+            else
+            {
+                M_Speed = M_Speed.normalized * ((M_Speed.magnitude - M_deadzone) / (1 / M_deadzone));
+            }
+            M_Speed.Normalize();
 
-        if (M_Speed.magnitude <= M_deadzone)
-        {
-            M_Speed = Vector3.zero;
+            rig.MovePosition(transform.position + (M_Speed * Speed) * Time.deltaTime);
+
+            #endregion Movement
+
+            if (XCI.GetButtonDown(XboxButton.A, Player_Nummber))
+            {
+                gameObject.transform.localScale = new Vector3(m_startScale.x * 1.25f, m_startScale.y * 0.7f, m_startScale.z);
+                Speed *= 0.45f;
+            }
+            if (XCI.GetButtonUp(XboxButton.A, Player_Nummber))
+            {
+                gameObject.transform.localScale = m_startScale;
+                Speed = holdspeed;
+            }
         }
         else
         {
-            M_Speed = M_Speed.normalized * ((M_Speed.magnitude - M_deadzone) / (1 / M_deadzone));
-        }
-        M_Speed.Normalize();
+            if ((transform.position - m_respawnLocation.position).magnitude <= m_distanceToRegainControll)
+            {
+                m_controlerHasControl = true;
+                return;
+            }
+            M_Speed = Vector3.zero;
 
-        rig.MovePosition(transform.position + (M_Speed * Speed) * Time.deltaTime);
+            //slowly moves the player from the position where he get shot to his respawn position
+            transform.position = Vector3.Lerp(transform.position, m_respawnLocation.position, (m_lerpToRespawnTimer * Vector3.Distance(transform.position, m_respawnLocation.position)) * Time.deltaTime);
 
-        #endregion Movement
-
-        if (XCI.GetButtonDown(XboxButton.A, Player_Nummber))
-        {
-            gameObject.transform.localScale = new Vector3(m_startScale.x * 1.25f, m_startScale.y * 0.7f, m_startScale.z);
-            Speed *= 0.45f;
-        }
-        if (XCI.GetButtonUp(XboxButton.A, Player_Nummber))
-        {
-            gameObject.transform.localScale = m_startScale;
-            Speed = holdspeed;
+            //slowly rotates the character from any rotation to standing upright
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, m_distanceToRegainControll * 20 * Time.deltaTime);
+            Debug.Log(m_distanceToRegainControll * Time.deltaTime);
+            //TODO smooth out the rotation
         }
     }
 
     public void Hit()
     {
-        //Debug.Log($"{gameObject.name} got hit");
-        //m_controlerHasControl = false;
-
-        transform.position = m_respawnLocation.position;
-        transform.rotation = new Quaternion(0, 0, 0, 0);
+        m_controlerHasControl = false;
     }
 
     public void AtFinish()
     {
+        m_controlerHasControl = false;
+
         playerScore++;
-
-        transform.position = m_respawnLocation.position;
-        transform.rotation = new Quaternion(0, 0, 0, 0);
-
         UpdateUI();
     }
 
     private void UpdateUI()
     {
-        playerScoreText.text = $"{playerScore}";
+        string color = "";
+
+        switch (Player_Nummber)
+        {
+            case XboxController.First:
+                {
+                    color = "red";
+                    break;
+                }
+            case XboxController.Second:
+                {
+                    color = "blue";
+                    break;
+                }
+            case XboxController.Third:
+                {
+                    color = "yellow";
+                    break;
+                }
+            case XboxController.Fourth:
+                {
+                    color = "magenta";
+                    break;
+                }
+        }
+        playerScoreText.text = $"<color={color}> {playerScore} </color>";
     }
 }

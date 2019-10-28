@@ -93,11 +93,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9d3512a81d1c3458205e10fb228e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_controlerHasControl: 1
+  m_lerpToRespawnTimer: 1.5
+  m_distanceToRegainControll: 0.4
   M_Speed: {x: 0, y: 0, z: 0}
   Speed: 2.25
   M_deadzone: 0.35
   Player_Nummber: 1
   m_respawnLocation: {fileID: 0}
+  playerScoreText: {fileID: 0}
 --- !u!54 &7937575992236418673
 Rigidbody:
   m_ObjectHideFlags: 0

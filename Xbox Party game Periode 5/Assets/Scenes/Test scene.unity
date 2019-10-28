@@ -272,7 +272,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'player2:'
+  m_Text: <color=blue>Player2:</color>
 --- !u!222 &217266468
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -396,7 +396,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 679834620}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.45, y: 0.6964985, z: 16.49694}
+  m_LocalPosition: {x: -3.45, y: 0.7, z: 16.49694}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
@@ -725,7 +725,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184035460}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.45, y: 0.6964985, z: 16.49694}
+  m_LocalPosition: {x: -7.45, y: 0.7, z: 16.49694}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
@@ -755,7 +755,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187391975}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.45, y: 0.6964985, z: 16.49694}
+  m_LocalPosition: {x: -5.45, y: 0.7, z: 16.49694}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
@@ -922,7 +922,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'player3:'
+  m_Text: <color=yellow>Player3:</color>
 --- !u!222 &1478869843
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1000,7 +1000,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'player4:'
+  m_Text: <color=magenta>Player4:</color>
 --- !u!222 &1540436853
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1210,7 +1210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1888108957}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.45, y: 0.6964985, z: 16.49694}
+  m_LocalPosition: {x: -1.45, y: 0.7, z: 16.49694}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1387,7 +1387,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'player1:'
+  m_Text: <color=red>Player1:</color>
 --- !u!222 &2088040096
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1545,7 +1545,7 @@ PrefabInstance:
     - target: {fileID: 5182790056335953805, guid: 1f2eb94feef775f459b538b558c7490e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6964985
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5182790056335953805, guid: 1f2eb94feef775f459b538b558c7490e,
         type: 3}
@@ -1628,7 +1628,7 @@ PrefabInstance:
     - target: {fileID: 6987485129772814058, guid: 5661700e1f5bfbd4bbfc4b8f6a3af0c6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6964985
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 6987485129772814058, guid: 5661700e1f5bfbd4bbfc4b8f6a3af0c6,
         type: 3}
@@ -1709,7 +1709,7 @@ PrefabInstance:
     - target: {fileID: 952937228778828388, guid: 7fc82b25d9590274ea36374ea2fed693,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6964985
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 952937228778828388, guid: 7fc82b25d9590274ea36374ea2fed693,
         type: 3}
@@ -1773,7 +1773,7 @@ PrefabInstance:
     - target: {fileID: 2291980868204315611, guid: dacccf6a76b085c4288060658edf58f9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6964985
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2291980868204315611, guid: dacccf6a76b085c4288060658edf58f9,
         type: 3}
