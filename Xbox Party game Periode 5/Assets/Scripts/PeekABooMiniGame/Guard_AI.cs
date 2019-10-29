@@ -107,17 +107,17 @@ public class Guard_AI : MonoBehaviour
         }
         else
         {
-            List<Targetable> targets = new List<Targetable>();
-            for (int i = 0; i < PlayersInView.Count; i++)
+            Targetable[] targets = new Targetable[m_targetsInView.Count];
+            for (int i = 0; i < m_targetsInView.Count; i++)
             {
-                targets[i] = PlayersInView[i].GetComponent<Targetable>();
+                targets[i] = m_targetsInView[i].GetComponent<Targetable>();
             }
 
             if (targets[0].GetMovementSpeed().magnitude > targets[0].GetDeadzone())
             {
                 m_currentViewAngle = Mathf.Clamp(m_currentViewAngle -= 200 * Time.deltaTime, m_viewAngle.minValue, m_viewAngle.maxValue);
-                m_lookTarget = PlayersInView[0].transform.position;
-                transform.LookAt(PlayersInView[0].transform.position);
+                m_lookTarget = m_targetsInView[0].transform.position;
+                transform.LookAt(m_targetsInView[0].transform.position);
 
                 while (Time.time > m_nextFire)
                 {
@@ -125,18 +125,18 @@ public class Guard_AI : MonoBehaviour
 
                     Instantiate(m_bulletPrefab, transform.position, transform.rotation);
 
-                    PlayersInView.RemoveAt(0);
+                    m_targetsInView.RemoveAt(0);
 
                     m_nextFire = Time.time + m_fireRate;
                 }
             }
             else
             {
-                PlayersInView.RemoveAt(0);
+                m_targetsInView.RemoveAt(0);
             }
         }
 
-        if (PlayersInView.Count >= 1)
+        if (m_targetsInView.Count >= 1)
         {
             PlayerVisable = true;
         }
