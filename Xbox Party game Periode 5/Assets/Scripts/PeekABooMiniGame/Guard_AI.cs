@@ -35,12 +35,12 @@ public class Guard_AI : MonoBehaviour
     [SerializeField] private Transform m_LookLocation = null;
     [SerializeField] private Transform m_BackLookLocation = null;
 
-    private Vector3 m_lookTarget = Vector3.zero;
+    private Vector3 m_lookTarget;
 
     private float m_waitingTimer = 0;
     private float m_targetWaitTime = 1;
 
-    [SerializeField, Range(0.5f, 2.0f)] private float m_fireRate = 1.0f;
+    [SerializeField, Range(0.01f, 2.0f)] private float m_fireRate = 1.0f;
     private float m_nextFire = 0;
 
     [SerializeField] private GameObject m_bulletPrefab = null;
@@ -87,7 +87,15 @@ public class Guard_AI : MonoBehaviour
             {
                 m_lookingTowardsPlayers = !m_lookingTowardsPlayers;
                 m_waitingTimer = 0;
-                m_targetWaitTime = GetRandomWaitTime();
+
+                if (m_lookingTowardsPlayers)
+                {
+                    m_targetWaitTime = GetMaxWaitTime();
+                }
+                else
+                {
+                    m_targetWaitTime = GetMinWaitTime();
+                }
             }
         }
         else
@@ -100,11 +108,11 @@ public class Guard_AI : MonoBehaviour
 
             if (player[0].M_Speed.magnitude > player[0].M_deadzone)
             {
+                m_lookTarget = PlayersInView[0].transform.position;
+                transform.LookAt(PlayersInView[0].transform.position);
+
                 while (Time.time > m_nextFire)
                 {
-                    m_lookTarget = PlayersInView[0].transform.position;
-                    transform.LookAt(PlayersInView[0].transform.position);
-
                     //Bullet bullet = m_bulletPrefab.GetComponent<Bullet>();
                     //bullet.SetTarget(PlayersInView[0].transform.position);
                     simpleAudio.Play(audioSource);
@@ -169,10 +177,10 @@ public class Guard_AI : MonoBehaviour
         return Random.Range(m_maxWaitTime.minValue, m_maxWaitTime.maxValue);
     }
 
-    private float GetRandomWaitTime()
-    {
-        return Random.Range(GetMinWaitTime(), GetMaxWaitTime());
-    }
+    //private float GetRandomWaitTime()
+    //{
+    //    return Random.Range(GetMinWaitTime(), GetMaxWaitTime());
+    //}
 
     #endregion Waiting time values
 
@@ -200,16 +208,12 @@ public class Guard_AI : MonoBehaviour
                 float dstToTarget = Vector3.Distance(transform.position, target.transform.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, m_obstacleMask))
                 {
-                    //TODO use PlayersInView to find players
-
                     if (target.GetComponent<Player>())
                     {
                         if (!PlayersInView.Contains(target))
                         {
                             PlayersInView.Add(target);
-                            //Debug.Log(target.gameObject);
                         }
-                        //do things here
                     }
                 }
             }
