@@ -93,7 +93,6 @@ public class Player : MonoBehaviour
 
             //slowly rotates the character from any rotation to standing upright
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, m_distanceToRegainControll * 20 * Time.deltaTime);
-            Debug.Log(m_distanceToRegainControll * Time.deltaTime);
             //TODO smooth out the rotation
         }
     }
@@ -139,5 +138,10 @@ public class Player : MonoBehaviour
                 }
         }
         playerScoreText.text = $"<color={color}> {playerScore} </color>";
+    }
+
+    public void PausePlayer(bool pause)
+    {
+        m_controlerHasControl = pause;
     }
 }
