@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Targetable : MonoBehaviour
+public class Targetable : MonoBehaviour
 {
-    protected Transform m_targetable;
-    protected Vector3 M_Speed;
-
-    public Vector3 GetMovementSpeed()
+    public virtual Vector3 GetMovementSpeed()
     {
-        return M_Speed;
+        return Vector3.zero;
     }
 
-    public Transform GetTargetTransform()
+    public virtual float GetDeadzone()
     {
-        return m_targetable;
+        return 0;
     }
 
-    public abstract float GetDeadzone();
-
-    public abstract GameObject GetGameObject();
+    public virtual void Hit()
+    {
+        Debug.Log("wrong hit");
+    }
 }

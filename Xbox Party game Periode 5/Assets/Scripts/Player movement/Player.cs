@@ -15,7 +15,7 @@ public class Player : Targetable
     [Space(10)] public Vector3 M_Speed;
 
     public float Speed = 5;
-    private float holdspeed;
+    //private float holdspeed;
 
     [Range(0, 1)]
     public float M_deadzone;
@@ -25,19 +25,20 @@ public class Player : Targetable
     private float _YAxis;
     private Rigidbody rig;
 
+    [Space(10)]
     [SerializeField] private Transform m_respawnLocation;
 
-    private Vector3 m_startScale = Vector3.zero;
+    //private Vector3 m_startScale = Vector3.zero;
 
     [SerializeField] private Text playerScoreText;
     private int playerScore;
 
     private void Start()
     {
-        m_startScale = transform.localScale;
-
         rig = GetComponent<Rigidbody>();
-        holdspeed = Speed;
+
+        //m_startScale = transform.localScale;
+        //holdspeed = Speed;
 
         playerScore = 0;
         UpdateUI();
@@ -45,8 +46,6 @@ public class Player : Targetable
 
     private void Update()
     {
-        m_targetable = gameObject.transform;
-
         if (m_controlerHasControl)
         {
             #region Movement
@@ -95,13 +94,17 @@ public class Player : Targetable
 
             //slowly rotates the character from any rotation to standing upright
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, m_distanceToRegainControll * 20 * Time.deltaTime);
-            //TODO smooth out the rotation
         }
     }
 
-    public void Hit()
+    public override void Hit()
     {
         m_controlerHasControl = false;
+    }
+
+    public override Vector3 GetMovementSpeed()
+    {
+        return M_Speed;
     }
 
     public void AtFinish()
@@ -145,10 +148,5 @@ public class Player : Targetable
     public override float GetDeadzone()
     {
         return M_deadzone;
-    }
-
-    public override GameObject GetGameObject()
-    {
-        return gameObject;
     }
 }

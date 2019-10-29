@@ -14,15 +14,23 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         transform.position += transform.forward * m_speed * Time.deltaTime;
+
+        if (Physics.BoxCast(transform.position, Vector3.one / 2, transform.forward, out RaycastHit hit))
+        {
+            if (hit.collider.GetComponent<Targetable>())
+            {
+                hit.collider.GetComponent<Targetable>().Hit();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnDrawGizmos()
     {
-        if (collision.gameObject.GetComponent<Player>())
-        {
-            Player player = collision.gameObject.GetComponent<Player>();
-            player.Hit();
-        }
-        Destroy(gameObject);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, Vector3.one);
     }
 }

@@ -1,6 +1,5 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Guard_AI : MonoBehaviour
@@ -25,7 +24,7 @@ public class Guard_AI : MonoBehaviour
     [SerializeField] private MeshFilter m_viewMeshFilter = null;
     private Mesh m_viewMesh;
 
-    [SerializeField] private List<GameObject> PlayersInView = new List<GameObject>(5);
+    [SerializeField] private List<GameObject> m_targetsInView;
 
     #endregion Field of View variables
 
@@ -64,6 +63,8 @@ public class Guard_AI : MonoBehaviour
 
     private void Start()
     {
+        m_targetsInView = new List<GameObject>();
+
         m_lookTarget = m_LookLocation.position;
 
         m_currentViewAngle = m_viewAngle.maxValue;
@@ -216,11 +217,9 @@ public class Guard_AI : MonoBehaviour
                 {
                     if (target.GetComponent<Targetable>())
                     {
-                        if (!PlayersInView.Contains(target))
+                        if (!m_targetsInView.Contains(target))
                         {
-                            PlayersInView.Add(target);
-
-                            //TODO finish converting target player to target targetable
+                            m_targetsInView.Add(target);
                         }
                     }
                 }
@@ -304,10 +303,4 @@ public class Guard_AI : MonoBehaviour
     }
 
     #endregion Field Of View
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.white;
-        Gizmos.DrawCube(m_lookTarget, Vector3.one);
-    }
 }
