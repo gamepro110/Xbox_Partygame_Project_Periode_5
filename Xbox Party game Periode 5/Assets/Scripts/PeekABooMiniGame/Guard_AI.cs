@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Guard_AI : MonoBehaviour
@@ -12,7 +13,8 @@ public class Guard_AI : MonoBehaviour
     [SerializeField] private RangedFloat m_maxWaitTime;
 
     public float m_viewRadius = 10.0f;
-    [Range(60.0f, 180.0f)] public float m_viewAngle = 90.0f;
+    [SerializeField, MinMaxRange(20.0f, 60.0f)] private RangedFloat m_viewAngle;
+    public float m_currentViewAngle = 60.0f;
 
     [SerializeField] private LayerMask m_obstacleMask;
     [SerializeField] private LayerMask m_targetMask;
@@ -64,6 +66,8 @@ public class Guard_AI : MonoBehaviour
     {
         m_lookTarget = m_LookLocation.position;
 
+        m_currentViewAngle = m_viewAngle.maxValue;
+
         StartCoroutine(FindTargetWithDelay(m_viewMeshRefreshRate));
     }
 
@@ -72,6 +76,8 @@ public class Guard_AI : MonoBehaviour
         //rotation
         if (!PlayerVisable)
         {
+            m_currentViewAngle = Mathf.Clamp(m_currentViewAngle += 200 * Time.deltaTime, m_viewAngle.minValue, m_viewAngle.maxValue);
+
             //rotation direction
             if (m_lookingTowardsPlayers)
             {
@@ -100,21 +106,20 @@ public class Guard_AI : MonoBehaviour
         }
         else
         {
-            Player[] player = new Player[4];
+            List<Targetable> targets = new List<Targetable>();
             for (int i = 0; i < PlayersInView.Count; i++)
             {
-                player[i] = PlayersInView[i].GetComponent<Player>();
+                targets[i] = PlayersInView[i].GetComponent<Targetable>();
             }
 
-            if (player[0].M_Speed.magnitude > player[0].M_deadzone)
+            if (targets[0].GetMovementSpeed().magnitude > targets[0].GetDeadzone())
             {
+                m_currentViewAngle = Mathf.Clamp(m_currentViewAngle -= 200 * Time.deltaTime, m_viewAngle.minValue, m_viewAngle.maxValue);
                 m_lookTarget = PlayersInView[0].transform.position;
                 transform.LookAt(PlayersInView[0].transform.position);
 
                 while (Time.time > m_nextFire)
                 {
-                    //Bullet bullet = m_bulletPrefab.GetComponent<Bullet>();
-                    //bullet.SetTarget(PlayersInView[0].transform.position);
                     simpleAudio.Play(audioSource);
 
                     Instantiate(m_bulletPrefab, transform.position, transform.rotation);
@@ -190,6 +195,7 @@ public class Guard_AI : MonoBehaviour
     {
         while (true)
         {
+            //remove this line to remove delay
             yield return new WaitForSeconds(delay);
             FindVisableTarget();
         }
@@ -203,16 +209,18 @@ public class Guard_AI : MonoBehaviour
         {
             GameObject target = targetsInViewRadius[i].gameObject;
             Vector3 dirToTarget = (target.transform.position - transform.position).normalized;
-            if (Vector3.Angle(transform.forward, dirToTarget) < m_viewAngle / 2)
+            if (Vector3.Angle(transform.forward, dirToTarget) < m_currentViewAngle / 2)
             {
                 float dstToTarget = Vector3.Distance(transform.position, target.transform.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, m_obstacleMask))
                 {
-                    if (target.GetComponent<Player>())
+                    if (target.GetComponent<Targetable>())
                     {
                         if (!PlayersInView.Contains(target))
                         {
                             PlayersInView.Add(target);
+
+                            //TODO finish converting target player to target targetable
                         }
                     }
                 }
@@ -222,14 +230,14 @@ public class Guard_AI : MonoBehaviour
 
     private void DrawFieldOfView()
     {
-        int StepCount = Mathf.RoundToInt(m_viewAngle * m_viewMeshResolution);
-        float stepAngleSize = m_viewAngle / StepCount;
+        int StepCount = Mathf.RoundToInt(m_currentViewAngle * m_viewMeshResolution);
+        float stepAngleSize = m_currentViewAngle / StepCount;
 
         List<Vector3> viewpoints = new List<Vector3>();
 
         for (int i = 0; i < StepCount; i++)
         {
-            float angle = transform.eulerAngles.y - m_viewAngle / 2 + stepAngleSize * i;
+            float angle = transform.eulerAngles.y - m_currentViewAngle / 2 + stepAngleSize * i;
             ViewCastInfo newViewCast = ViewCast(angle);
             viewpoints.Add(newViewCast.point);
             //Debug.DrawLine(transform.position, transform.position + DirFromAngle(angle, true) * m_viewRadius, Color.red);

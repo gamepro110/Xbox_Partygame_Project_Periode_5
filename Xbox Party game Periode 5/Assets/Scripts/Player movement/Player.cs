@@ -5,7 +5,7 @@ using XboxCtrlrInput;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Player : MonoBehaviour
+public class Player : Targetable
 {
     [SerializeField] private bool m_controlerHasControl = true;
     [SerializeField] private float m_lerpToRespawnTimer = 10f;
@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        m_targetable = gameObject.transform;
+
         if (m_controlerHasControl)
         {
             #region Movement
@@ -68,16 +70,16 @@ public class Player : MonoBehaviour
 
             #endregion Movement
 
-            if (XCI.GetButtonDown(XboxButton.A, Player_Nummber))
-            {
-                gameObject.transform.localScale = new Vector3(m_startScale.x * 1.25f, m_startScale.y * 0.7f, m_startScale.z);
-                Speed *= 0.45f;
-            }
-            if (XCI.GetButtonUp(XboxButton.A, Player_Nummber))
-            {
-                gameObject.transform.localScale = m_startScale;
-                Speed = holdspeed;
-            }
+            //if (XCI.GetButtonDown(XboxButton.A, Player_Nummber))
+            //{
+            //    gameObject.transform.localScale = new Vector3(m_startScale.x * 1.25f, m_startScale.y * 0.7f, m_startScale.z);
+            //    Speed *= 0.45f;
+            //}
+            //if (XCI.GetButtonUp(XboxButton.A, Player_Nummber))
+            //{
+            //    gameObject.transform.localScale = m_startScale;
+            //    Speed = holdspeed;
+            //}
         }
         else
         {
@@ -140,8 +142,13 @@ public class Player : MonoBehaviour
         playerScoreText.text = $"<color={color}> {playerScore} </color>";
     }
 
-    public void PausePlayer(bool pause)
+    public override float GetDeadzone()
     {
-        m_controlerHasControl = pause;
+        return M_deadzone;
+    }
+
+    public override GameObject GetGameObject()
+    {
+        return gameObject;
     }
 }
