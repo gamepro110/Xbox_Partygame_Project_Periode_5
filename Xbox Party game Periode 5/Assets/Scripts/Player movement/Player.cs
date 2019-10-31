@@ -5,7 +5,7 @@ using XboxCtrlrInput;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Player : MonoBehaviour
+public class Player : Targetable
 {
     [SerializeField] private bool m_controlerHasControl = true;
     [SerializeField] private float m_lerpToRespawnTimer = 10f;
@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     [Space(10)] public Vector3 M_Speed;
 
     public float Speed = 5;
-    private float holdspeed;
+    //private float holdspeed;
 
     [Range(0, 1)]
     public float M_deadzone;
@@ -25,19 +25,20 @@ public class Player : MonoBehaviour
     private float _YAxis;
     private Rigidbody rig;
 
+    [Space(10)]
     [SerializeField] private Transform m_respawnLocation;
 
-    private Vector3 m_startScale = Vector3.zero;
+    //private Vector3 m_startScale = Vector3.zero;
 
     [SerializeField] private Text playerScoreText;
     private int playerScore;
 
     private void Start()
     {
-        m_startScale = transform.localScale;
-
         rig = GetComponent<Rigidbody>();
-        holdspeed = Speed;
+
+        //m_startScale = transform.localScale;
+        //holdspeed = Speed;
 
         playerScore = 0;
         UpdateUI();
@@ -68,16 +69,16 @@ public class Player : MonoBehaviour
 
             #endregion Movement
 
-            if (XCI.GetButtonDown(XboxButton.A, Player_Nummber))
-            {
-                gameObject.transform.localScale = new Vector3(m_startScale.x * 1.25f, m_startScale.y * 0.7f, m_startScale.z);
-                Speed *= 0.45f;
-            }
-            if (XCI.GetButtonUp(XboxButton.A, Player_Nummber))
-            {
-                gameObject.transform.localScale = m_startScale;
-                Speed = holdspeed;
-            }
+            //if (XCI.GetButtonDown(XboxButton.A, Player_Nummber))
+            //{
+            //    gameObject.transform.localScale = new Vector3(m_startScale.x * 1.25f, m_startScale.y * 0.7f, m_startScale.z);
+            //    Speed *= 0.45f;
+            //}
+            //if (XCI.GetButtonUp(XboxButton.A, Player_Nummber))
+            //{
+            //    gameObject.transform.localScale = m_startScale;
+            //    Speed = holdspeed;
+            //}
         }
         else
         {
@@ -93,14 +94,17 @@ public class Player : MonoBehaviour
 
             //slowly rotates the character from any rotation to standing upright
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, m_distanceToRegainControll * 20 * Time.deltaTime);
-            Debug.Log(m_distanceToRegainControll * Time.deltaTime);
-            //TODO smooth out the rotation
         }
     }
 
-    public void Hit()
+    public override void Hit()
     {
         m_controlerHasControl = false;
+    }
+
+    public override Vector3 GetMovementSpeed()
+    {
+        return M_Speed;
     }
 
     public void AtFinish()
@@ -139,5 +143,10 @@ public class Player : MonoBehaviour
                 }
         }
         playerScoreText.text = $"<color={color}> {playerScore} </color>";
+    }
+
+    public override float GetDeadzone()
+    {
+        return M_deadzone;
     }
 }
