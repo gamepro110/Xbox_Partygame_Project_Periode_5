@@ -7,22 +7,22 @@ public class Guard_AI : MonoBehaviour
     #region Field of View variables
 
     [Header("Field Of View Variables")]
-    [SerializeField] private RangedFloat m_minWaitTime;
+    [SerializeField] private RangedFloat m_minWaitTime = new RangedFloat();
 
-    [SerializeField] private RangedFloat m_maxWaitTime;
+    [SerializeField] private RangedFloat m_maxWaitTime = new RangedFloat();
 
     public float m_viewRadius = 10.0f;
-    [SerializeField, MinMaxRange(20.0f, 60.0f)] private RangedFloat m_viewAngle;
+    [SerializeField, MinMaxRange(20.0f, 60.0f)] private RangedFloat m_viewAngle = new RangedFloat();
     public float m_currentViewAngle = 60.0f;
 
-    [SerializeField] private LayerMask m_obstacleMask;
-    [SerializeField] private LayerMask m_targetMask;
+    [SerializeField] private LayerMask m_obstacleMask = new LayerMask();
+    [SerializeField] private LayerMask m_targetMask = new LayerMask();
 
     [SerializeField, Range(1.0f, 30.0f)] private float m_viewMeshResolution = 10.0f;
     [SerializeField, Range(0.01f, 1.0f)] private float m_viewMeshRefreshRate = 1;
 
     [SerializeField] private MeshFilter m_viewMeshFilter = null;
-    private Mesh m_viewMesh;
+    private Mesh m_viewMesh = null;
 
     [SerializeField] private List<GameObject> m_targetsInView;
 
