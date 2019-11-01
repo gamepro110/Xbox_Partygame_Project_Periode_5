@@ -42,6 +42,7 @@ public class Player : Targetable
 
         playerScore = 0;
         UpdateUI();
+        
     }
 
     private void Update()
@@ -118,31 +119,36 @@ public class Player : Targetable
     private void UpdateUI()
     {
         string color = "";
+        int playerNum = 0;
 
         switch (Player_Nummber)
         {
             case XboxController.First:
                 {
+                    playerNum = 1;
                     color = "red";
                     break;
                 }
             case XboxController.Second:
                 {
+                    playerNum = 2;
                     color = "blue";
                     break;
                 }
             case XboxController.Third:
                 {
+                    playerNum = 3;
                     color = "yellow";
                     break;
                 }
             case XboxController.Fourth:
                 {
+                    playerNum = 4;
                     color = "magenta";
                     break;
                 }
         }
-        playerScoreText.text = $"<color={color}> {playerScore} </color>";
+        playerScoreText.text = $"<color={color}>Player{playerNum}: {playerScore} </color>";
     }
 
     public override float GetDeadzone()
