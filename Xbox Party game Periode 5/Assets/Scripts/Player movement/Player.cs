@@ -20,7 +20,7 @@ public class Player : Targetable
     [Range(0, 1)]
     public float M_deadzone;
 
-    [SerializeField] private XboxController Player_Nummber;
+    [SerializeField] private XboxController Player_Nummber = XboxController.Any;
     private float _XAxis;
     private float _YAxis;
     private Rigidbody rig;
@@ -35,6 +35,11 @@ public class Player : Targetable
 
     private void Start()
     {
+        if (Player_Nummber == XboxController.Any)
+        {
+            Debug.LogWarning("Assign Players Player number.");
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
         rig = GetComponent<Rigidbody>();
 
         //m_startScale = transform.localScale;
@@ -42,7 +47,6 @@ public class Player : Targetable
 
         playerScore = 0;
         UpdateUI();
-        
     }
 
     private void Update()
