@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class LocInView : MonoBehaviour
 {
-    private GuardAI coneView = null;
+    private Guard_AI coneView = null;
 
     private void OnDrawGizmos()
     {
         if (coneView == null)
         {
-            coneView = FindObjectOfType<GuardAI>();
+            coneView = FindObjectOfType<Guard_AI>();
             if (coneView == null)
             {
                 return;
             }
         }
 
-        Gizmos.color = coneView.ConeVisual(transform.position) ? Color.magenta : Color.gray;
-        Gizmos.DrawSphere(transform.position, 0.4f);
+        //Gizmos.color = coneView.ConeVisual(transform.position) ? Color.magenta : Color.gray;
+        //Gizmos.DrawSphere(transform.position, 0.4f);
     }
 }

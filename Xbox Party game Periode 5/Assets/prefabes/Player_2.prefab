@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   M_Speed: {x: 0, y: 0, z: 0}
-  Speed: 5
+  Speed: 2.25
   M_deadzone: 0.35
   Player_Nummber: 2
   m_respawnLocation: {fileID: 0}
