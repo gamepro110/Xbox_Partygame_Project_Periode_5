@@ -17,7 +17,7 @@ public class LocInView : MonoBehaviour
             }
         }
 
-        Gizmos.color = coneView.ConeVisual(transform.position) ? Color.magenta : Color.gray;
-        Gizmos.DrawSphere(transform.position, 0.4f);
+        //Gizmos.color = coneView.ConeVisual(transform.position) ? Color.magenta : Color.gray;
+        //Gizmos.DrawSphere(transform.position, 0.4f);
     }
 }

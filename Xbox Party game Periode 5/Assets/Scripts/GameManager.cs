@@ -12,16 +12,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Button m_continue = null;
     [SerializeField] private Button m_quit = null;
 
-    [SerializeField] private RectTransform m_cursorTransform = null;
-
     private bool m_gameIsPaused = false;
     public bool GameIsPaused { get => m_gameIsPaused; }
 
     [Range(0, 1)] private float m_gameSpeed = 1.0f;
-
-    private float m_xCanvasAxis;
-    private float m_yCanvasAxis;
-    [SerializeField] private float m_cursorMovementSpeed = 5.0f;
 
     private void Awake()
     {
@@ -54,11 +48,6 @@ public class GameManager : MonoBehaviour
         if (m_gameIsPaused)
         {
             PauseOrUnpause();
-
-            m_xCanvasAxis = XCI.GetAxis(XboxAxis.LeftStickX, XboxController.First);
-            m_yCanvasAxis = XCI.GetAxis(XboxAxis.LeftStickY, XboxController.First);
-
-            MovePauseScreenCursor();
         }
         else
         {
@@ -68,11 +57,6 @@ public class GameManager : MonoBehaviour
 
     private void PauseOrUnpause()
     {
-        for (int i = 0; i < m_players.Length; i++)
-        {
-            m_players[i].PausePlayer(!m_gameIsPaused);
-        }
-
         m_pauseMenu.enabled = m_gameIsPaused;
         Time.timeScale = m_gameIsPaused ? 0 : 1;
     }
@@ -85,13 +69,5 @@ public class GameManager : MonoBehaviour
     private void QuitButton()
     {
         Debug.Log("Quit");
-    }
-
-    private void MovePauseScreenCursor()
-    {
-        m_cursorTransform.localPosition += Vector3.right * m_xCanvasAxis * m_cursorMovementSpeed;
-        m_cursorTransform.localPosition += Vector3.up * m_yCanvasAxis * m_cursorMovementSpeed;
-
-        //TODO ask anne for help with UI Cursor
     }
 }
