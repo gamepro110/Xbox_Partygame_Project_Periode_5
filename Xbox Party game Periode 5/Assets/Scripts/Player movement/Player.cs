@@ -25,6 +25,7 @@ public class Player : Targetable
     private float _XAxis;
     private float _YAxis;
     private Rigidbody rig;
+    
 
     [Space(10)]
     [SerializeField] private Transform m_respawnLocation;
@@ -74,6 +75,8 @@ public class Player : Targetable
             rig.MovePosition(transform.position + (M_Speed * Speed) * Time.deltaTime);
 
             #endregion Movement
+
+            
 
             //if (XCI.GetButtonDown(XboxButton.A, Player_Nummber))
             //{
