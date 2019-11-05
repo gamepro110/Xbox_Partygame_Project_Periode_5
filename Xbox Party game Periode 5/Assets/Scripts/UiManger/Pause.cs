@@ -20,17 +20,14 @@ public class Pause : MonoBehaviour
         if (XCI.GetButtonUp(XboxButton.Start, XboxController.Any))
         {
             IsPaused = !IsPaused;
+            UnPauseOrPause();
         }
-        if(IsPaused == true)
-        {
-            Pausemenu.SetActive(true);
-            Time.timeScale = 0;
-        }
-        if(IsPaused == false)
-        {
-            Pausemenu.SetActive(false);
-            Time.timeScale = 1;
-        }
+        
+    }
+    private void UnPauseOrPause()
+    {
+        Pausemenu.SetActive(IsPaused);
+        Time.timeScale = IsPaused? 0:1;
     }
     public void QuitAreYouSure()
     {
