@@ -23,8 +23,11 @@ public class Crappel : MonoBehaviour
 
     private float Cooldowntimer = 1f;
 
+    private ObjectPooling m_pool = null;
+
     private void Start()
     {
+        m_pool = GetComponent<ObjectPooling>();
         rig = GetComponent<Rigidbody>();
     }
     void Update()
@@ -52,7 +55,8 @@ public class Crappel : MonoBehaviour
         {
             if (XCI.GetButtonUp(XboxButton.X, ForPlayerNumber))
             {
-                Instantiate(ObjDrop[0], transform.position, Quaternion.identity);
+                //Instantiate(ObjDrop[0], transform.position, Quaternion.identity);
+                m_pool.InstantiateItem(transform.position, Quaternion.identity);
                 Cooldowntimer = 1f;
             }
 

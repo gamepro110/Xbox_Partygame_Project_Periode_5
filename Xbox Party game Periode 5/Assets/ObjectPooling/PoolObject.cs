@@ -11,7 +11,7 @@ public abstract class PoolObject : MonoBehaviour
         set => m_pool = value;
     }
 
-    protected abstract void ResetItem();
+    public abstract void ResetItem();
 
     public virtual void Init(Vector3 pos, Quaternion rotation, Transform parent = null)
     {
