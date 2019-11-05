@@ -15,8 +15,6 @@ public class GameManager : MonoBehaviour
     private bool m_gameIsPaused = false;
     public bool GameIsPaused { get => m_gameIsPaused; }
 
-    [Range(0, 1)] private float m_gameSpeed = 1.0f;
-
     private void Awake()
     {
         if (Access)

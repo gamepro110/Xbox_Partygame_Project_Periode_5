@@ -20,7 +20,7 @@ public class Player : Targetable
     [Range(0, 1)]
     public float M_deadzone;
 
-    [SerializeField] private XboxController Player_Nummber;
+    [SerializeField] private XboxController Player_Nummber = XboxController.Any;
     private float _XAxis;
     private float _YAxis;
     private Rigidbody rig;
@@ -35,6 +35,11 @@ public class Player : Targetable
 
     private void Start()
     {
+        if (Player_Nummber == XboxController.Any)
+        {
+            Debug.LogWarning("Assign Players Player number.");
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
         rig = GetComponent<Rigidbody>();
 
         //m_startScale = transform.localScale;
@@ -118,31 +123,36 @@ public class Player : Targetable
     private void UpdateUI()
     {
         string color = "";
+        int playerNum = 0;
 
         switch (Player_Nummber)
         {
             case XboxController.First:
                 {
+                    playerNum = 1;
                     color = "red";
                     break;
                 }
             case XboxController.Second:
                 {
+                    playerNum = 2;
                     color = "blue";
                     break;
                 }
             case XboxController.Third:
                 {
+                    playerNum = 3;
                     color = "yellow";
                     break;
                 }
             case XboxController.Fourth:
                 {
+                    playerNum = 4;
                     color = "magenta";
                     break;
                 }
         }
-        playerScoreText.text = $"<color={color}> {playerScore} </color>";
+        playerScoreText.text = $"<color={color}>Player{playerNum}: {playerScore} </color>";
     }
 
     public override float GetDeadzone()
