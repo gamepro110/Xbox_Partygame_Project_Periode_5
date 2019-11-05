@@ -12,7 +12,7 @@ public class Block : Targetable
     private void Start()
     {
         poolding_ = GetComponent<poolding>();
-        Destroytimer = Random.Range(4, 6);
+        Destroytimer = Random.Range(3, 4);
     }
 
     private void Update()
@@ -23,8 +23,8 @@ public class Block : Targetable
             poolding_.ReturnToPool();
         }
     }
-    public override void Hit()
-    {
-        poolding_.ReturnToPool();
-    }
+    //public override void Hit()
+    //{
+    //    poolding_.ReturnToPool();
+    //}
 }

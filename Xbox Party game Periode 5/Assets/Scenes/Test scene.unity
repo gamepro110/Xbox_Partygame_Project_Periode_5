@@ -1058,7 +1058,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124435252}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1564.8987, z: 0}
+  m_LocalPosition: {x: 0, y: -1482.0007, z: 0}
   m_LocalScale: {x: 6.6345997, y: 6.6345997, z: 12.519489}
   m_Children: []
   m_Father: {fileID: 5578055442745931513}
@@ -3121,7 +3121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 692048213}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1567.8955, z: 0}
+  m_LocalPosition: {x: 0, y: -1484.9976, z: 0}
   m_LocalScale: {x: 6.6345997, y: 6.6345997, z: 12.519489}
   m_Children: []
   m_Father: {fileID: 1588783961453344603}
@@ -3461,7 +3461,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793569352}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1573.8953, z: 0}
+  m_LocalPosition: {x: 0, y: -1490.9973, z: 0}
   m_LocalScale: {x: 6.6345997, y: 6.6345997, z: 12.519489}
   m_Children: []
   m_Father: {fileID: 2291980867255953314}
@@ -4945,7 +4945,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167239860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1569.9, z: 0}
+  m_LocalPosition: {x: 0, y: -1487, z: 0}
   m_LocalScale: {x: 6.6346, y: 6.6346, z: 12.51949}
   m_Children: []
   m_Father: {fileID: 2976148301379669318}
@@ -7288,6 +7288,11 @@ PrefabInstance:
       propertyPath: m_minWaitTime.maxValue
       value: 2.497832
       objectReference: {fileID: 0}
+    - target: {fileID: 4982313449489538217, guid: 94af65e8923d9a24abdb64b87dabdb4d,
+        type: 3}
+      propertyPath: m_viewAngle.maxValue
+      value: 101.70213
+      objectReference: {fileID: 0}
     - target: {fileID: 1146861786285314965, guid: 94af65e8923d9a24abdb64b87dabdb4d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9409,6 +9414,7 @@ GameObject:
   - component: {fileID: 2217683117832592980}
   - component: {fileID: 5564070421608433832}
   - component: {fileID: 6470820053224306604}
+  - component: {fileID: 2217683117832592981}
   m_Layer: 0
   m_Name: Player_4_crappel
   m_TagString: Untagged
@@ -9428,11 +9434,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab8ced9687fcca4aba612c903bd0573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjDrop: []
+  ObjDrop:
+  - {fileID: 5958375292197797757, guid: 2c413ca21abda504ba7a1f57163b3544, type: 3}
   M_Speed: {x: 0, y: 0, z: 0}
   ForPlayerNumber: 4
   Speed: 5
   M_deadzone: 0.35
+--- !u!114 &2217683117832592981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2217683117832592979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d430bba54211704a97f1834da00846e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_poolObject: {fileID: 5958375292197797757, guid: 2c413ca21abda504ba7a1f57163b3544,
+    type: 3}
+  m_poolSize: 20
+  m_poolItems: []
 --- !u!4 &2291980867255953314
 Transform:
   m_ObjectHideFlags: 0
@@ -9595,7 +9618,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5056012613965666732}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 42.398132, y: 121.80521, z: 100}
@@ -9762,6 +9785,7 @@ GameObject:
   - component: {fileID: 5056012613965666733}
   - component: {fileID: 3578239204722531403}
   - component: {fileID: 3539745920969661392}
+  - component: {fileID: 5056012613965666734}
   m_Layer: 0
   m_Name: Player_2_crappel
   m_TagString: Untagged
@@ -9781,11 +9805,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab8ced9687fcca4aba612c903bd0573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjDrop: []
+  ObjDrop:
+  - {fileID: 5958375292197797757, guid: 2c413ca21abda504ba7a1f57163b3544, type: 3}
   M_Speed: {x: 0, y: 0, z: 0}
   ForPlayerNumber: 2
   Speed: 5
   M_deadzone: 0.35
+--- !u!114 &5056012613965666734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5056012613965666732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d430bba54211704a97f1834da00846e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_poolObject: {fileID: 5958375292197797757, guid: 2c413ca21abda504ba7a1f57163b3544,
+    type: 3}
+  m_poolSize: 20
+  m_poolItems: []
 --- !u!114 &5233531812087842968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9996,6 +10037,7 @@ GameObject:
   - component: {fileID: 5999224873977822897}
   - component: {fileID: 1452396877217166817}
   - component: {fileID: 8276770657670149686}
+  - component: {fileID: 5999224873977822898}
   m_Layer: 0
   m_Name: Player_3_crappel
   m_TagString: Untagged
@@ -10015,11 +10057,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab8ced9687fcca4aba612c903bd0573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjDrop: []
+  ObjDrop:
+  - {fileID: 5958375292197797757, guid: 2c413ca21abda504ba7a1f57163b3544, type: 3}
   M_Speed: {x: 0, y: 0, z: 0}
   ForPlayerNumber: 3
   Speed: 5
   M_deadzone: 0.35
+--- !u!114 &5999224873977822898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5999224873977822896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d430bba54211704a97f1834da00846e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_poolObject: {fileID: 5958375292197797757, guid: 2c413ca21abda504ba7a1f57163b3544,
+    type: 3}
+  m_poolSize: 20
+  m_poolItems: []
 --- !u!65 &6470820053224306604
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10028,7 +10087,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2217683117832592979}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 42.398132, y: 121.80521, z: 100}
@@ -10049,7 +10108,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8142393712770316522}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 42.3981, y: 121.80521, z: 100}
@@ -10203,6 +10262,7 @@ GameObject:
   - component: {fileID: 8142393712770316523}
   - component: {fileID: 5355636543525411155}
   - component: {fileID: 6728813359867351667}
+  - component: {fileID: 8142393712770316524}
   m_Layer: 0
   m_Name: Player_1_crappel
   m_TagString: Untagged
@@ -10223,11 +10283,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjDrop:
-  - {fileID: 0}
+  - {fileID: 5958375292197797757, guid: 2c413ca21abda504ba7a1f57163b3544, type: 3}
   M_Speed: {x: 0, y: 0, z: 0}
   ForPlayerNumber: 1
   Speed: 5
   M_deadzone: 0.35
+--- !u!114 &8142393712770316524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8142393712770316522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d430bba54211704a97f1834da00846e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_poolObject: {fileID: 5958375292197797757, guid: 2c413ca21abda504ba7a1f57163b3544,
+    type: 3}
+  m_poolSize: 10
+  m_poolItems: []
 --- !u!1001 &8184614776277268652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10316,7 +10392,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5999224873977822896}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 42.398132, y: 121.80521, z: 100}
