@@ -23,4 +23,8 @@ public class Block : Targetable
             poolding_.ReturnToPool();
         }
     }
+    public override void Hit()
+    {
+        poolding_.ReturnToPool();
+    }
 }
