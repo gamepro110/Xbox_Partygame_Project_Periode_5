@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XboxCtrlrInput;
 using UnityEngine.UI;
+using XInputDotNetPure;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : Targetable
@@ -105,6 +106,41 @@ public class Player : Targetable
     public override void Hit()
     {
         m_controlerHasControl = false;
+        PlayerIndex index = PlayerIndex.One;
+        switch (Player_Nummber)
+        {
+            case XboxController.First:
+                {
+                    index = PlayerIndex.One;
+                    break;
+                }
+
+            case XboxController.Second:
+                {
+                    index = PlayerIndex.Two;
+                    break;
+                }
+
+            case XboxController.Third:
+                {
+                    index = PlayerIndex.Three;
+                    break;
+                }
+
+            case XboxController.Fourth:
+                {
+                    index = PlayerIndex.Four;
+                    break;
+                }
+        }
+        StartCoroutine(StartRumble(index, 0.5f, 4));
+    }
+
+    private IEnumerator StartRumble(PlayerIndex playerIndex, float time, float strength)
+    {
+        GamePad.SetVibration(playerIndex, strength, strength);
+        yield return new WaitForSeconds(time);
+        GamePad.SetVibration(playerIndex, 0, 0);
     }
 
     public override Vector3 GetMovementSpeed()
