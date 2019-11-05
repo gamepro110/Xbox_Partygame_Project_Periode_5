@@ -204,19 +204,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_minWaitTime:
     minValue: 1.0020174
-    maxValue: 2.001019
+    maxValue: 2.497832
   m_maxWaitTime:
     minValue: 1.9978544
     maxValue: 3.4950967
   m_viewRadius: 20
-  m_viewAngle: 60
+  m_viewAngle:
+    minValue: 20
+    maxValue: 60
+  m_currentViewAngle: 60
   m_obstacleMask:
     serializedVersion: 2
     m_Bits: 256
   m_targetMask:
     serializedVersion: 2
     m_Bits: 512
-  m_viewMeshResolution: 20
+  m_viewMeshResolution: 30
   m_viewMeshRefreshRate: 0.01
   m_viewMeshFilter: {fileID: 1146861786177418063}
   PlayersInView: []
