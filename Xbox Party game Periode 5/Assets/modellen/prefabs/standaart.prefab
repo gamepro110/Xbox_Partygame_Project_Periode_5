@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7073705030946229388}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4274156159290435798}
   - component: {fileID: 728525129276234269}
   - component: {fileID: 4757529947960452187}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pSphere2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7732810579518821073}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pasted__pCylinder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5868461500278620937}
   - component: {fileID: 4338359905464599565}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: standaart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
