@@ -12,7 +12,7 @@ public class Guard_AI : MonoBehaviour
     [SerializeField] private RangedFloat m_maxWaitTime = new RangedFloat();
 
     public float m_viewRadius = 10.0f;
-    [SerializeField, MinMaxRange(20.0f, 60.0f)] private RangedFloat m_viewAngle = new RangedFloat();
+    [SerializeField, MinMaxRange(20.0f, 160.0f)] private RangedFloat m_viewAngle = new RangedFloat();
     public float m_currentViewAngle = 60.0f;
 
     [SerializeField] private LayerMask m_obstacleMask = new LayerMask();
@@ -115,20 +115,11 @@ public class Guard_AI : MonoBehaviour
 
             if (targets[0].GetMovementSpeed().magnitude > targets[0].GetDeadzone())
             {
-                m_currentViewAngle = Mathf.Clamp(m_currentViewAngle -= 200 * Time.deltaTime, m_viewAngle.minValue, m_viewAngle.maxValue);
-                m_lookTarget = m_targetsInView[0].transform.position;
-                transform.LookAt(m_targetsInView[0].transform.position);
-
-                while (Time.time > m_nextFire)
-                {
-                    simpleAudio.Play(audioSource);
-
-                    Instantiate(m_bulletPrefab, transform.position, transform.rotation);
-
-                    m_targetsInView.RemoveAt(0);
-
-                    m_nextFire = Time.time + m_fireRate;
-                }
+                Shooting();
+            }
+            else if (!targets[0].GetComponent<Player>())
+            {
+                Shooting();
             }
             else
             {
@@ -151,6 +142,24 @@ public class Guard_AI : MonoBehaviour
     private void LateUpdate()
     {
         DrawFieldOfView();
+    }
+
+    private void Shooting()
+    {
+        m_currentViewAngle = Mathf.Clamp(m_currentViewAngle -= 200 * Time.deltaTime, m_viewAngle.minValue, m_viewAngle.maxValue);
+        m_lookTarget = m_targetsInView[0].transform.position;
+        transform.LookAt(m_targetsInView[0].transform.position);
+
+        while (Time.time > m_nextFire)
+        {
+            simpleAudio.Play(audioSource);
+
+            Instantiate(m_bulletPrefab, transform.position, transform.rotation);
+
+            m_targetsInView.RemoveAt(0);
+
+            m_nextFire = Time.time + m_fireRate;
+        }
     }
 
     /// <summary>

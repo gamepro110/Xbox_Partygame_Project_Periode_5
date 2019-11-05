@@ -7288,6 +7288,11 @@ PrefabInstance:
       propertyPath: m_minWaitTime.maxValue
       value: 2.497832
       objectReference: {fileID: 0}
+    - target: {fileID: 4982313449489538217, guid: 94af65e8923d9a24abdb64b87dabdb4d,
+        type: 3}
+      propertyPath: m_viewAngle.maxValue
+      value: 101.70213
+      objectReference: {fileID: 0}
     - target: {fileID: 1146861786285314965, guid: 94af65e8923d9a24abdb64b87dabdb4d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9428,7 +9433,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab8ced9687fcca4aba612c903bd0573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjDrop: []
+  ObjDrop:
+  - {fileID: 5958375292197797757, guid: 2c413ca21abda504ba7a1f57163b3544, type: 3}
   M_Speed: {x: 0, y: 0, z: 0}
   ForPlayerNumber: 4
   Speed: 5
@@ -9781,7 +9787,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab8ced9687fcca4aba612c903bd0573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjDrop: []
+  ObjDrop:
+  - {fileID: 5958375292197797757, guid: 2c413ca21abda504ba7a1f57163b3544, type: 3}
   M_Speed: {x: 0, y: 0, z: 0}
   ForPlayerNumber: 2
   Speed: 5
@@ -10015,7 +10022,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab8ced9687fcca4aba612c903bd0573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjDrop: []
+  ObjDrop:
+  - {fileID: 5958375292197797757, guid: 2c413ca21abda504ba7a1f57163b3544, type: 3}
   M_Speed: {x: 0, y: 0, z: 0}
   ForPlayerNumber: 3
   Speed: 5
@@ -10223,7 +10231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjDrop:
-  - {fileID: 0}
+  - {fileID: 5958375292197797757, guid: 2c413ca21abda504ba7a1f57163b3544, type: 3}
   M_Speed: {x: 0, y: 0, z: 0}
   ForPlayerNumber: 1
   Speed: 5
