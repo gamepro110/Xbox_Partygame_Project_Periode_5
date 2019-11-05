@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1486644999730254530}
   - component: {fileID: 5160305673355111995}
   - component: {fileID: 4263467403959663683}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: kratten
   m_TagString: Untagged
   m_Icon: {fileID: 0}
