@@ -783,7 +783,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124435252}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1564.8987, z: 0}
+  m_LocalPosition: {x: 0, y: -1482.0007, z: 0}
   m_LocalScale: {x: 6.6345997, y: 6.6345997, z: 12.519489}
   m_Children: []
   m_Father: {fileID: 5578055442745931513}
@@ -2514,7 +2514,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 692048213}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1567.8955, z: 0}
+  m_LocalPosition: {x: 0, y: -1484.9976, z: 0}
   m_LocalScale: {x: 6.6345997, y: 6.6345997, z: 12.519489}
   m_Children: []
   m_Father: {fileID: 1588783961453344603}
@@ -2774,7 +2774,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793569352}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1573.8953, z: 0}
+  m_LocalPosition: {x: 0, y: -1490.9973, z: 0}
   m_LocalScale: {x: 6.6345997, y: 6.6345997, z: 12.519489}
   m_Children: []
   m_Father: {fileID: 2291980867255953314}
@@ -3858,7 +3858,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167239860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1569.9, z: 0}
+  m_LocalPosition: {x: 0, y: -1487, z: 0}
   m_LocalScale: {x: 6.6346, y: 6.6346, z: 12.51949}
   m_Children: []
   m_Father: {fileID: 2976148301379669318}
@@ -7308,6 +7308,7 @@ GameObject:
   - component: {fileID: 2217683117832592980}
   - component: {fileID: 5564070421608433832}
   - component: {fileID: 6470820053224306604}
+  - component: {fileID: 2217683117832592981}
   m_Layer: 0
   m_Name: Player_4_crappel
   m_TagString: Untagged
@@ -7489,7 +7490,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5056012613965666732}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 42.398132, y: 121.80521, z: 100}
@@ -7656,6 +7657,7 @@ GameObject:
   - component: {fileID: 5056012613965666733}
   - component: {fileID: 3578239204722531403}
   - component: {fileID: 3539745920969661392}
+  - component: {fileID: 5056012613965666734}
   m_Layer: 0
   m_Name: Player_2_crappel
   m_TagString: Untagged
@@ -7885,6 +7887,7 @@ GameObject:
   - component: {fileID: 5999224873977822897}
   - component: {fileID: 1452396877217166817}
   - component: {fileID: 8276770657670149686}
+  - component: {fileID: 5999224873977822898}
   m_Layer: 0
   m_Name: Player_3_crappel
   m_TagString: Untagged
@@ -7912,7 +7915,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2217683117832592979}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 42.398132, y: 121.80521, z: 100}
@@ -7933,7 +7936,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8142393712770316522}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 42.3981, y: 121.80521, z: 100}
@@ -8087,6 +8090,7 @@ GameObject:
   - component: {fileID: 8142393712770316523}
   - component: {fileID: 5355636543525411155}
   - component: {fileID: 6728813359867351667}
+  - component: {fileID: 8142393712770316524}
   m_Layer: 0
   m_Name: Player_1_crappel
   m_TagString: Untagged
@@ -8194,7 +8198,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5999224873977822896}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 42.398132, y: 121.80521, z: 100}
