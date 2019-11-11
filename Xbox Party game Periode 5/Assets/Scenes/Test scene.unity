@@ -965,7 +965,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124435252}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1564.8987, z: 0}
+  m_LocalPosition: {x: 0, y: -1482.0007, z: 0}
   m_LocalScale: {x: 6.6345997, y: 6.6345997, z: 12.519489}
   m_Children: []
   m_Father: {fileID: 5578055442745931513}
@@ -1244,12 +1244,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6fd402a32ea1a84898300b2a0d2883a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuobj: {fileID: 670033215}
-  credits: {fileID: 265486336}
-  youSure: {fileID: 1092295407}
-  howManyPlayer: {fileID: 2111003550}
-  CanvasGame: {fileID: 2047603407}
-  Finishobj: {fileID: 178348708}
+  mainMenuobj: {fileID: 0}
+  credits: {fileID: 0}
+  youSure: {fileID: 0}
+  howManyPlayer: {fileID: 0}
+  CanvasGame: {fileID: 0}
+  Finishobj: {fileID: 0}
 --- !u!4 &225703107
 Transform:
   m_ObjectHideFlags: 0
@@ -1679,7 +1679,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 294455429}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -2389,7 +2389,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 571486821}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -3092,7 +3092,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 692048213}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1567.8955, z: 0}
+  m_LocalPosition: {x: 0, y: -1484.9976, z: 0}
   m_LocalScale: {x: 6.6345997, y: 6.6345997, z: 12.519489}
   m_Children: []
   m_Father: {fileID: 1588783961453344603}
@@ -3419,7 +3419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793569352}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1573.8953, z: 0}
+  m_LocalPosition: {x: 0, y: -1490.9973, z: 0}
   m_LocalScale: {x: 6.6345997, y: 6.6345997, z: 12.519489}
   m_Children: []
   m_Father: {fileID: 2291980867255953314}
@@ -4825,7 +4825,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167239860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1569.9, z: 0}
+  m_LocalPosition: {x: 0, y: -1487, z: 0}
   m_LocalScale: {x: 6.6346, y: 6.6346, z: 12.51949}
   m_Children: []
   m_Father: {fileID: 2976148301379669318}
@@ -6483,7 +6483,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1562836224}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -7523,12 +7523,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!4 &1805606714 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2304493504670945414, guid: 8337b325a8f627f4c95d1261a6ed58c2,
-    type: 3}
-  m_PrefabInstance: {fileID: 1930540311}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1828814124
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7803,7 +7797,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1843144459}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -8398,7 +8392,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1956451848}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -8535,7 +8529,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1983490590}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -9356,7 +9350,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5056012613965666732}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 42.398132, y: 121.80521, z: 100}
@@ -9789,7 +9783,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2217683117832592979}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 42.398132, y: 121.80521, z: 100}
@@ -9810,7 +9804,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8142393712770316522}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 42.3981, y: 121.80521, z: 100}
@@ -9988,6 +9982,86 @@ MonoBehaviour:
   ForPlayerNumber: 0
   Speed: 5
   M_deadzone: 0
+--- !u!1001 &8184614776277268652
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 935856309}
+    m_Modifications:
+    - target: {fileID: 6092090128468608968, guid: 7fc82b25d9590274ea36374ea2fed693,
+        type: 3}
+      propertyPath: m_Name
+      value: Player_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 952937228778828388, guid: 7fc82b25d9590274ea36374ea2fed693,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -961.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 952937228778828388, guid: 7fc82b25d9590274ea36374ea2fed693,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -539.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 952937228778828388, guid: 7fc82b25d9590274ea36374ea2fed693,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 16.49694
+      objectReference: {fileID: 0}
+    - target: {fileID: 952937228778828388, guid: 7fc82b25d9590274ea36374ea2fed693,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 952937228778828388, guid: 7fc82b25d9590274ea36374ea2fed693,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 952937228778828388, guid: 7fc82b25d9590274ea36374ea2fed693,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 952937228778828388, guid: 7fc82b25d9590274ea36374ea2fed693,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 952937228778828388, guid: 7fc82b25d9590274ea36374ea2fed693,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7457672002946996728, guid: 7fc82b25d9590274ea36374ea2fed693,
+        type: 3}
+      propertyPath: m_respawnLocation
+      value: 
+      objectReference: {fileID: 1888108958}
+    - target: {fileID: 7457672002946996728, guid: 7fc82b25d9590274ea36374ea2fed693,
+        type: 3}
+      propertyPath: playerScoreText
+      value: 
+      objectReference: {fileID: 245150711}
+    - target: {fileID: 7457672002946996728, guid: 7fc82b25d9590274ea36374ea2fed693,
+        type: 3}
+      propertyPath: rigCrappel
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937575992236418673, guid: 7fc82b25d9590274ea36374ea2fed693,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7fc82b25d9590274ea36374ea2fed693, type: 3}
+--- !u!4 &8184614776277268653 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 952937228778828388, guid: 7fc82b25d9590274ea36374ea2fed693,
+    type: 3}
+  m_PrefabInstance: {fileID: 8184614776277268652}
+  m_PrefabAsset: {fileID: 0}
 --- !u!65 &8276770657670149686
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9996,7 +10070,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5999224873977822896}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 42.398132, y: 121.80521, z: 100}
