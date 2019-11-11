@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using XboxCtrlrInput;
 
@@ -30,7 +29,8 @@ public class Crappel : MonoBehaviour
         m_pool = GetComponent<ObjectPooling>();
         rig = GetComponent<Rigidbody>();
     }
-    void Update()
+
+    private void Update()
     {
         _XAxis = -XCI.GetAxis(XboxAxis.RightStickX, ForPlayerNumber);
         _YAxis = -XCI.GetAxis(XboxAxis.RightStickY, ForPlayerNumber);
@@ -49,7 +49,6 @@ public class Crappel : MonoBehaviour
 
         rig.MovePosition(transform.position + (M_Speed * Speed) * Time.deltaTime);
 
-
         Cooldowntimer -= Time.deltaTime;
         if (Cooldowntimer <= 0)
         {
@@ -59,14 +58,6 @@ public class Crappel : MonoBehaviour
                 m_pool.InstantiateItem(transform.position, Quaternion.identity);
                 Cooldowntimer = 1f;
             }
-
         }
-
-       
     }
-
-
-
-     
 }
-

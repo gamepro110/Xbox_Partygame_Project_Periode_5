@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class UiManger : MonoBehaviour
 {
     public GameObject mainMenuobj;
     public GameObject credits;
+
     //public Canvas gameCanvas;
     //public Canvas mainMenucan;
     public GameObject youSure;
+
     public GameObject howManyPlayer;
     public GameObject CanvasGame;
     public GameObject Finishobj;
@@ -23,6 +22,7 @@ public class UiManger : MonoBehaviour
         howManyPlayer.SetActive(false);
         CanvasGame.SetActive(false);
     }
+
     public void MainMenuObj()
     {
         Finishobj.SetActive(false);
@@ -32,6 +32,7 @@ public class UiManger : MonoBehaviour
         howManyPlayer.SetActive(false);
         CanvasGame.SetActive(false);
     }
+
     public void HowManyPlayer_()
     {
         Finishobj.SetActive(false);
@@ -40,6 +41,7 @@ public class UiManger : MonoBehaviour
         credits.SetActive(false);
         youSure.SetActive(false);
     }
+
     public void Credits_()
     {
         Finishobj.SetActive(false);
@@ -48,6 +50,7 @@ public class UiManger : MonoBehaviour
         credits.SetActive(true);
         youSure.SetActive(false);
     }
+
     public void YouSure()
     {
         Finishobj.SetActive(false);
@@ -56,10 +59,12 @@ public class UiManger : MonoBehaviour
         credits.SetActive(false);
         youSure.SetActive(true);
     }
+
     public void Quit()
     {
         Application.Quit();
     }
+
     public void GameStart()
     {
         Finishobj.SetActive(false);
@@ -69,6 +74,7 @@ public class UiManger : MonoBehaviour
         credits.SetActive(false);
         youSure.SetActive(false);
     }
+
     public void EndScene()
     {
         CanvasGame.SetActive(false);
