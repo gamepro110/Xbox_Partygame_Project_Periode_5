@@ -42,10 +42,9 @@ public class Player : Targetable
             UnityEditor.EditorApplication.isPlaying = false;
         }
         rig = GetComponent<Rigidbody>();
-        m_animator = GetComponent<Animator>();
+        m_animator = GetComponentInChildren<Animator>();
 
-        //m_startScale = transform.localScale;
-        //holdspeed = Speed;
+        m_respawnLocation = transform;
 
         playerScore = 0;
         UpdateUI();
@@ -65,12 +64,18 @@ public class Player : Targetable
             if (M_Speed.magnitude <= M_deadzone)
             {
                 M_Speed = Vector3.zero;
-                m_animator.speed = 0;
+                if (m_animator != null)
+                {
+                    m_animator.speed = 0;
+                }
             }
             else
             {
                 M_Speed = M_Speed.normalized * ((M_Speed.magnitude - M_deadzone) / (1 / M_deadzone));
-                m_animator.speed = 1;
+                if (m_animator != null)
+                {
+                    m_animator.speed = 1;
+                }
             }
             M_Speed.Normalize();
 
