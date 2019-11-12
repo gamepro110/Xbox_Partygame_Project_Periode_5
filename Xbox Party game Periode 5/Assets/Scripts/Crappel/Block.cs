@@ -22,8 +22,8 @@ public class Block : Targetable
         }
     }
 
-    //public override void Hit()
-    //{
-    //    poolding_.ReturnToPool();
-    //}
+    public override void Hit()
+    {
+        poolding_.ReturnToPool();
+    }
 }
