@@ -74,20 +74,9 @@ public class Player : Targetable
             }
             M_Speed.Normalize();
 
-            rig.MovePosition(transform.position + (M_Speed * (Speed * transform.localScale.magnitude)) * Time.deltaTime);
+            rig.MovePosition(transform.position + M_Speed * Speed * Time.deltaTime);
 
             #endregion Movement
-
-            //if (XCI.GetButtonDown(XboxButton.A, Player_Nummber))
-            //{
-            //    gameObject.transform.localScale = new Vector3(m_startScale.x * 1.25f, m_startScale.y * 0.7f, m_startScale.z);
-            //    Speed *= 0.45f;
-            //}
-            //if (XCI.GetButtonUp(XboxButton.A, Player_Nummber))
-            //{
-            //    gameObject.transform.localScale = m_startScale;
-            //    Speed = holdspeed;
-            //}
         }
         else
         {
@@ -96,6 +85,7 @@ public class Player : Targetable
                 m_controlerHasControl = true;
                 return;
             }
+
             M_Speed = Vector3.zero;
 
             //slowly moves the player from the position where he get shot to his respawn position
