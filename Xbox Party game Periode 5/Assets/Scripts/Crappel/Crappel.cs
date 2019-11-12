@@ -22,11 +22,10 @@ public class Crappel : MonoBehaviour
 
     private float Cooldowntimer = 1f;
 
-    private ObjectPooling m_pool = null;
+    [SerializeField] private ObjectPooling m_pool = null;
 
     private void Start()
     {
-        m_pool = GetComponent<ObjectPooling>();
         rig = GetComponent<Rigidbody>();
     }
 
