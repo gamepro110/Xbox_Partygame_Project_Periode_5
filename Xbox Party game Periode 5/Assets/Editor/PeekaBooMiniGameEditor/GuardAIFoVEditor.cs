@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEditor;
 using UnityEngine;
-using UnityEditor;
 
 [ExecuteInEditMode, CustomEditor(typeof(Guard_AI))]
 public class GuardAIFoVEditor : Editor

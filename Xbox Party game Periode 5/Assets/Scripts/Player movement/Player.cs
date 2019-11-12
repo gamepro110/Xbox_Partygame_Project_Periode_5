@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using XboxCtrlrInput;
 using UnityEngine.UI;
+using XboxCtrlrInput;
 using XInputDotNetPure;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -25,14 +24,14 @@ public class Player : Targetable
     private float _XAxis;
     private float _YAxis;
     private Rigidbody rig;
-    
+    private Animator m_animator;
 
     [Space(10)]
-    [SerializeField] private Transform m_respawnLocation;
+    [SerializeField] private Transform m_respawnLocation = null;
 
     //private Vector3 m_startScale = Vector3.zero;
 
-    [SerializeField] private Text playerScoreText;
+    [SerializeField] private Text playerScoreText = null;
     private int playerScore;
 
     private void Start()
@@ -43,6 +42,7 @@ public class Player : Targetable
             UnityEditor.EditorApplication.isPlaying = false;
         }
         rig = GetComponent<Rigidbody>();
+        m_animator = GetComponent<Animator>();
 
         //m_startScale = transform.localScale;
         //holdspeed = Speed;
@@ -65,18 +65,18 @@ public class Player : Targetable
             if (M_Speed.magnitude <= M_deadzone)
             {
                 M_Speed = Vector3.zero;
+                m_animator.speed = 0;
             }
             else
             {
                 M_Speed = M_Speed.normalized * ((M_Speed.magnitude - M_deadzone) / (1 / M_deadzone));
+                m_animator.speed = 1;
             }
             M_Speed.Normalize();
 
-            rig.MovePosition(transform.position + (M_Speed * Speed) * Time.deltaTime);
+            rig.MovePosition(transform.position + (M_Speed * (Speed * transform.localScale.magnitude)) * Time.deltaTime);
 
             #endregion Movement
-
-            
 
             //if (XCI.GetButtonDown(XboxButton.A, Player_Nummber))
             //{
