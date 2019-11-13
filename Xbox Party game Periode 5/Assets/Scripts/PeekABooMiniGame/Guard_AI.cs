@@ -6,6 +6,9 @@ public class Guard_AI : MonoBehaviour
 {
     #region Field of View variables
 
+    [SerializeField] private GameObject guardBody = null;
+    [SerializeField] private GameObject FOVThing = null;
+
     [Header("Field Of View Variables")]
     [SerializeField] private RangedFloat m_minWaitTime = new RangedFloat();
 
@@ -176,8 +179,9 @@ public class Guard_AI : MonoBehaviour
 
     private void CharacterRotate()
     {
-        Vector3 difference = m_lookTarget - gameObject.transform.position;
-        transform.forward = Vector3.Slerp(transform.forward, difference, m_rotationSpeed * Time.deltaTime);
+        Vector3 difference = m_lookTarget - guardBody.gameObject.transform.position;
+        guardBody.transform.forward = Vector3.Slerp(guardBody.transform.forward, difference, m_rotationSpeed * Time.deltaTime);
+        FOVThing.transform.eulerAngles = guardBody.transform.rotation.eulerAngles - new Vector3(0, 180, 0);
     }
 
     #region Waiting time values

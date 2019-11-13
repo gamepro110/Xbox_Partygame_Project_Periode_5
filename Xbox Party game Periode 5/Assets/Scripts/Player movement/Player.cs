@@ -42,10 +42,7 @@ public class Player : Targetable
             UnityEditor.EditorApplication.isPlaying = false;
         }
         rig = GetComponent<Rigidbody>();
-        m_animator = GetComponent<Animator>();
-
-        //m_startScale = transform.localScale;
-        //holdspeed = Speed;
+        m_animator = GetComponentInChildren<Animator>();
 
         playerScore = 0;
         UpdateUI();
@@ -74,7 +71,7 @@ public class Player : Targetable
             }
             M_Speed.Normalize();
 
-            rig.MovePosition(transform.position + (M_Speed * (Speed * transform.localScale.magnitude)) * Time.deltaTime);
+            rig.MovePosition(transform.position + (M_Speed * (Speed * transform.GetChild(0).localScale.magnitude)) * Time.deltaTime);
 
             #endregion Movement
 
