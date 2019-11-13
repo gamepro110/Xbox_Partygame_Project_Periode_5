@@ -79,7 +79,7 @@ public class Player : Targetable
             }
             M_Speed.Normalize();
 
-            rig.MovePosition(transform.position + M_Speed * Speed * Time.deltaTime);
+            rig.MovePosition(transform.position + (M_Speed * Speed) * transform.GetChild(0).transform.lossyScale.magnitude * Time.deltaTime);
 
             #endregion Movement
         }

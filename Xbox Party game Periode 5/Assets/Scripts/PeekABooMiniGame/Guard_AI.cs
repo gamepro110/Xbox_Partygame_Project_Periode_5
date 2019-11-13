@@ -6,6 +6,8 @@ public class Guard_AI : MonoBehaviour
 {
     #region Field of View variables
 
+    [SerializeField] private GameObject guardBody = null;
+
     [Header("Field Of View Variables")]
     [SerializeField] private RangedFloat m_minWaitTime = new RangedFloat();
 
@@ -23,6 +25,7 @@ public class Guard_AI : MonoBehaviour
 
     [SerializeField] private MeshFilter m_viewMeshFilter = null;
     private Mesh m_viewMesh = null;
+    [SerializeField] private GameObject meshTransform = null;
 
     [SerializeField] private List<GameObject> m_targetsInView;
 
@@ -154,7 +157,7 @@ public class Guard_AI : MonoBehaviour
         {
             simpleAudio.Play(audioSource);
 
-            Instantiate(m_bulletPrefab, transform.position, transform.rotation);
+            Instantiate(m_bulletPrefab, transform.position, transform.rotation);//TODO add shooting loc
 
             m_targetsInView.RemoveAt(0);
 
@@ -162,22 +165,11 @@ public class Guard_AI : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 1 if parallel, 0 if perpendicular, -1 if reverse parallel
-    /// </summary>
-    /// <param name="objectLocation"></param>
-    /// <returns>the object you are looking at</returns>
-    public bool ConeVisual(Vector3 objectLocation)
-    {
-        float cosAngle = Vector3.Dot((objectLocation - transform.position).normalized, transform.forward);
-        float angle = Mathf.Acos(cosAngle) * Mathf.Rad2Deg;
-        return angle < m_viewRadius;
-    }
-
     private void CharacterRotate()
     {
-        Vector3 difference = m_lookTarget - gameObject.transform.position;
-        transform.forward = Vector3.Slerp(transform.forward, difference, m_rotationSpeed * Time.deltaTime);
+        Vector3 difference = m_lookTarget - guardBody.transform.position;
+        guardBody.transform.forward = Vector3.Slerp(guardBody.transform.forward, difference, m_rotationSpeed * Time.deltaTime);
+        meshTransform.transform.eulerAngles = guardBody.transform.rotation.eulerAngles - new Vector3(0, 180, 0);
     }
 
     #region Waiting time values
