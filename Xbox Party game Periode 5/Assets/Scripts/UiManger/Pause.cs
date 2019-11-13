@@ -15,7 +15,7 @@ public class Pause : MonoBehaviour
 
     private void Update()
     {
-        if (XCI.GetButtonUp(XboxButton.Start, XboxController.Any))
+        if (XCI.GetButtonUp(XboxButton.Start, XboxController.Any)|| Input.GetKeyDown(KeyCode.Escape))
         {
             IsPaused = !IsPaused;
             UnPauseOrPause();
