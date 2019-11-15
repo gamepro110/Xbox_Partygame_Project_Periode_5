@@ -164,8 +164,6 @@ GameObject:
   - component: {fileID: 2304493504670945414}
   - component: {fileID: 8174375685504105980}
   - component: {fileID: 7383729446940407759}
-  - component: {fileID: 7962951874890074331}
-  - component: {fileID: 4342760246066515851}
   m_Layer: 0
   m_Name: player purple
   m_TagString: Untagged
@@ -221,43 +219,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.9942513, y: 7.0792694, z: 1.2602615}
   m_Center: {x: 3.2650127, y: 3.0396347, z: 0.17657089}
---- !u!54 &7962951874890074331
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2999517718598492821}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!114 &4342760246066515851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2999517718598492821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df9d3512a81d1c3458205e10fb228e1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_controlerHasControl: 1
-  m_lerpToRespawnTimer: 1.5
-  m_distanceToRegainControll: 0.4
-  M_Speed: {x: 0, y: 0, z: 0}
-  Speed: 2.25
-  M_deadzone: 0.35
-  Player_Nummber: 3
-  m_respawnLocation: {fileID: 0}
-  playerScoreText: {fileID: 0}
 --- !u!1 &3094406726748933304
 GameObject:
   m_ObjectHideFlags: 0
